@@ -13,6 +13,12 @@
             padding: 20px;
             max-width: 800px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
         }
         h1 {
             color: #9370DB; /* Midnight Purple */
@@ -44,27 +50,114 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
+        #audioControl {
+            margin-top: 20px;
+            color: #9370DB;
+            font-family: 'Courier New', Courier, monospace;
+            border-top: 1px solid #9370DB;
+            padding-top: 20px;
+        }
+        #audioControl button {
+            background-color: #4B0082;
+            color: #E6E6FA;
+            border: 1px solid #9370DB;
+            padding: 5px 10px;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+        }
+        #audioControl button:hover {
+            background-color: #6A5ACD;
+        }
+        #volumeSlider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            background: #9370DB;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        #volumeSlider:hover {
+            opacity: 1;
+        }
+        #volumeSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #E6E6FA;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        #volumeSlider::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: #E6E6FA;
+            cursor: pointer;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
-    <div class="announcement">
-        <div class="announcement-title">[ ANNOUNCEMENT ]</div>
-        <div class="announcement-content">Welcome to my updated social links page! Check out my latest project on GitHub.</div>
-    </div>
+    <div class="content">
+        <div class="announcement">
+            <div class="announcement-title">[ ANNOUNCEMENT ]</div>
+            <div class="announcement-content">Welcome to my updated social links page! Check out my latest project on GitHub. Their is a music player now that plays my favorite song!</div>
+        </div>
 
-    <h1>My Social Links</h1>
-    <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">cat social_links.txt</span></p>
-    <pre>
-====================
+        <h1>My Social Links</h1>
+        <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">cat social_links.txt</span></p>
+        <pre>
+ ====================
 | Social Media Links |
-====================
+ ====================
 1. Twitter: <a href="https://x.com/penios110253_">https://x.com/penios110253_</a>
 2. GitHub: <a href="https://github.com/01snowy">https://github.com/01snowy</a>
-3. Instagram: <a href="https://instagram.com/yourusername">https://instagram.com/yourusername</a>
+3. Instagram: <a href="https://www.instagram.com/w4st3d_i/">https://www.instagram.com/w4st3d_i/</a>
 4. Personal Website: <a href="https://sites.google.com/view/snowy0x/home">https://sites.google.com/view/snowy0x/home</a>
-    </pre>
-    <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">echo "Feel free to connect!"</span></p>
-    <p>Feel free to connect!</p>
-    <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">_</span></p>
+        </pre>
+        <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">echo "Feel free to connect!"</span></p>
+        <p>Feel free to connect!</p>
+        <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">_</span></p>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="\cli-website\kurtains - spawn.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="audioControl">
+        <p class="prompt">01snowy@social-links:~$<span class="command"> play_music</span></p>
+        <button onclick="toggleMusic()" id="playPauseBtn">[ Play ]</button>
+        <p class="prompt">01snowy@social-links:~$<span class="command"> set_volume</span></p>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5" onchange="adjustVolume()">
+    </div>
+
+    <script>
+        const audio = document.getElementById('backgroundMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.textContent = '[ Pause ]';
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = '[ Play ]';
+            }
+        }
+
+        function adjustVolume() {
+            audio.volume = volumeSlider.value;
+        }
+
+        // Autoplay music when the page loads
+        window.onload = function() {
+            audio.play().catch(e => {
+                console.log("Auto-play was prevented. Please use the play button to start the music.");
+            });
+        }
+    </script>
 </body>
 </html>
