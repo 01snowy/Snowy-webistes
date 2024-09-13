@@ -1,4 +1,3 @@
-Cli Themed website to host my socials
-\\made with claude
-
-\\edited by me
+//Cli Themed website's
+//made with claude
+//edited by me
