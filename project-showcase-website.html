@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Active Projects! </title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #0f0f1a;
+            color: #b39ddb;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .terminal {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #13152c;
+            border: 1px solid #6a4caf;
+            box-shadow: 0 0 10px rgba(106, 76, 175, 0.5);
+            overflow-y: auto;
+            height: calc(100% - 40px);
+        }
+        .prompt::before {
+            content: "01snowy@projects:~$ ";
+            color: #9575cd;
+        }
+        .command {
+            margin-bottom: 10px;
+            color: #d1c4e9;
+        }
+        .output {
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #7e57c2;
+            border-bottom: 1px solid #6a4caf;
+            padding-bottom: 5px;
+        }
+        .project {
+            margin-bottom: 30px;
+            border: 1px solid #6a4caf;
+            padding: 10px;
+            background-color: #1c1f4a;
+        }
+        .project-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border: 1px solid #6a4caf;
+        }
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+            color: #9575cd;
+        }
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+        a {
+            color: #64ffda;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #13152c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6a4caf;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7e57c2;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="command prompt">whoami</div>
+        <div class="output">project_showcase_01snowy</div>
+
+        <div class="command prompt">cat welcome.txt</div>
+        <div class="output" id="announcement">
+            Welcome to my midnight purple CLI-themed project showcase! Explore my latest work below.
+        </div>
+
+        <div class="command prompt">ls projects/</div>
+        <div class="output">
+            project1/  project2/  project3/
+        </div>
+
+        <div class="command prompt">cat projects/project1/README.md</div>
+        <div class="output project">
+            <h2>Project 1: Peble host minecraft server</h2>
+            <p>A custom tweaked Minecraft server hosted by peble host :</p>
+            <ul>
+                <li>Very optimized minecraft server</li>
+                <li>Teams, voice chat, world edit,perms, chatcolors!!!</li>
+                <li>Dead discord server:| </li>
+            </ul>
+            <p>Status: Active Development</p>
+        </div>
+
+        <div class="command prompt">cat projects/project2/README.md</div>
+        <div class="output project">
+            <h2>Project 2: My websites.</h2>
+            <p>My custom discord Bot:</p>
+            <ul>
+                <li>Made using kkrypt0n discord template</li>
+                <li>Moderates me and my friends discord servers</li>
+            </ul>
+            <p>Status: Final Build</p>
+            <p>GitHub to template: <a href="#">https://github.com/kkrypt0nn/Python-Discord-Bot-Template</a></p>
+        </div>
+
+        <div class="command prompt">cat projects/project3/README.md</div>
+        <div class="output project">
+            <h2>Project 3: My quest 2 face tracking setup</h2>
+            <img src="/api/placeholder/800/450" alt="Project 3" class="project-image">
+            <p>A collection of Bash scripts for system administration, themed in calming purple hues:</p>
+            <ul>
+                <li>WIP</li>
+                <li>WIP</li>
+                <li>WIP</li>
+            </ul>
+            <p>Status: Ongoing Development</p>
+            <p>GitHub: <a href="#">https://github.com/Project-Babble/ProjectBabble</a></p>
+        </div>
+
+        <div class="prompt">
+            <span class="blink">█</span>
+        </div>
+    </div>
+
+    <script>
+        function updateAnnouncement(message) {
+            document.getElementById('announcement').textContent = message;
+        }
+    </script>
+</body>
+</html>
