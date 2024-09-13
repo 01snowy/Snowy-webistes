@@ -1,2 +1,3 @@
-\\*made with claud
+\\made with claude
+
 \\edited by me
