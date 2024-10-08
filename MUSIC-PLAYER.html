@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Purple CLI Media Player</title>
+    <style>
+        body {
+            background-color: #1a0033;
+            color: #e6ccff;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .prompt::before {
+            content: "$ ";
+            color: #9966ff;
+        }
+        .input {
+            background-color: transparent;
+            border: none;
+            color: #e6ccff;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            width: 100%;
+            outline: none;
+        }
+        .output {
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #4d0099;
+            color: #e6ccff;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .btn:hover {
+            background-color: #6600cc;
+        }
+        .btn-icon {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .progress {
+            background-color: #33006f;
+            height: 20px;
+            margin-top: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        .progress-bar {
+            background-color: #9966ff;
+            height: 100%;
+            width: 0%;
+        }
+        .progress-time {
+            position: absolute;
+            right: 5px;
+            top: 0;
+            color: #e6ccff;
+        }
+        .ascii-art {
+            font-size: 14px;
+            line-height: 1.2;
+            text-align: left;
+            color: #9966ff;
+            margin-top: 30px;
+            white-space: pre;
+        }
+        #fileInput {
+            display: none;
+        }
+        .file-label {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="output">
+            Welcome to My Midnight Purple CLI Media Player v3.0
+            <label for="fileInput" class="file-label">Select music files</label> or type 'help' for a list of commands.
+        </div>
+        <div class="output" id="nowPlaying">
+            No music loaded
+        </div>
+        <div class="progress" id="progressBar">
+            <div class="progress-bar" id="progressBarFill"></div>
+            <div class="progress-time" id="progressTime">0:00 / 0:00</div>
+        </div>
+        <div class="controls">
+            <button class="btn" id="prevBtn"><span class="btn-icon">&lt;&lt;</span> Previous</button>
+            <button class="btn" id="playPauseBtn"><span class="btn-icon">||&gt;</span> Play/Pause</button>
+            <button class="btn" id="nextBtn"><span class="btn-icon">&gt;&gt;</span> Next</button>
+            <button class="btn" id="shuffleBtn"><span class="btn-icon">{x}</span> Shuffle</button>
+            <button class="btn" id="repeatBtn"><span class="btn-icon">[o]</span> Repeat</button>
+        </div>
+        <div class="prompt">
+            <input type="text" class="input" id="cliInput" placeholder="Enter command...">
+        </div>
+        <div class="ascii-art">
+    |\__/,|   (`\
+  *.|o o  |*   ) )
+-(((---(((--------
+        </div>
+    </div>
+    <input type="file" id="fileInput" multiple accept="audio/*">
+    <audio id="audioPlayer"></audio>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const fileInput = document.getElementById('fileInput');
+        const nowPlaying = document.getElementById('nowPlaying');
+        const progressBar = document.getElementById('progressBar');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const progressTime = document.getElementById('progressTime');
+        const prevBtn = document.getElementById('prevBtn');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        const repeatBtn = document.getElementById('repeatBtn');
+        const cliInput = document.getElementById('cliInput');
+
+        let playlist = [];
+        let currentTrack = 0;
+        let isShuffled = false;
+        let isRepeating = false;
+
+        fileInput.addEventListener('change', (e) => {
+            playlist = Array.from(e.target.files);
+            if (playlist.length > 0) {
+                currentTrack = 0;
+                loadTrack(currentTrack);
+            }
+        });
+
+        function loadTrack(index) {
+            if (index >= 0 && index < playlist.length) {
+                const file = playlist[index];
+                audioPlayer.src = URL.createObjectURL(file);
+                nowPlaying.textContent = `Now playing: ${file.name}`;
+                audioPlayer.play();
+            }
+        }
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+            } else {
+                audioPlayer.pause();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+            loadTrack(currentTrack);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentTrack = (currentTrack + 1) % playlist.length;
+            loadTrack(currentTrack);
+        });
+
+        shuffleBtn.addEventListener('click', () => {
+            isShuffled = !isShuffled;
+            if (isShuffled) {
+                shufflePlaylist();
+            } else {
+                // Reset to original order
+                playlist.sort((a, b) => a.name.localeCompare(b.name));
+            }
+        });
+
+        repeatBtn.addEventListener('click', () => {
+            isRepeating = !isRepeating;
+            audioPlayer.loop = isRepeating;
+        });
+
+        function shufflePlaylist() {
+            for (let i = playlist.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [playlist[i], playlist[j]] = [playlist[j], playlist[i]];
+            }
+        }
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            const currentTime = audioPlayer.currentTime;
+            const duration = audioPlayer.duration;
+            const progressPercent = (currentTime / duration) * 100;
+            progressBarFill.style.width = `${progressPercent}%`;
+            progressTime.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+        });
+
+        progressBar.addEventListener('click', (e) => {
+            const clickPosition = e.offsetX / progressBar.offsetWidth;
+            audioPlayer.currentTime = clickPosition * audioPlayer.duration;
+        });
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        cliInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleCommand(cliInput.value.trim().toLowerCase());
+                cliInput.value = '';
+            }
+        });
+
+        function handleCommand(command) {
+            switch (command) {
+                case 'play':
+                    audioPlayer.play();
+                    break;
+                case 'pause':
+                    audioPlayer.pause();
+                    break;
+                case 'next':
+                    nextBtn.click();
+                    break;
+                case 'prev':
+                    prevBtn.click();
+                    break;
+                case 'shuffle':
+                    shuffleBtn.click();
+                    break;
+                case 'repeat':
+                    repeatBtn.click();
+                    break;
+                case 'help':
+                    alert('Available commands: play, pause, next, prev, shuffle, repeat');
+                    break;
+                default:
+                    alert('Unknown command. Type "help" for a list of commands.');
+            }
+        }
+    </script>
+</body>
+</html>
