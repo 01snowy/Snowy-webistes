@@ -1,3 +1,1 @@
-//Cli Themed website's
-//made with claude
-//edited by me
+The source for my website
