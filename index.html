@@ -7,7 +7,7 @@
     <style>
         body {
             background-color: #1e1e1e;
-            color: #9370DB; /* Midnight Purple */
+            color: #9370DB; 
             font-family: 'Courier New', Courier, monospace;
             line-height: 1.6;
             padding: 20px;
@@ -21,26 +21,26 @@
             flex: 1;
         }
         h1 {
-            color: #9370DB; /* Midnight Purple */
+            color: #9370DB; 
             border-bottom: 1px solid #9370DB;
             padding-bottom: 10px;
         }
         .prompt {
-            color: #9370DB; /* Midnight Purple */
+            color: #9370DB; 
         }
         .command {
             color: #ffffff;
         }
         a {
-            color: #BA55D3; /* Medium Orchid - a lighter purple for contrast */
+            color: #BA55D3; 
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
         .announcement {
-            background-color: #4B0082; /* Indigo */
-            color: #E6E6FA; /* Lavender */
+            background-color: #4B0082; 
+            color: #E6E6FA; 
             padding: 10px;
             margin-bottom: 20px;
             border-radius: 5px;
@@ -159,7 +159,6 @@
             audio.volume = volumeSlider.value;
         }
 
-        // Autoplay music when the page loads
         window.onload = function() {
             audio.play().catch(e => {
                 console.log("Auto-play was prevented. Please use the play button to start the music.");
