@@ -16,14 +16,9 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden;
         }
         .content {
             flex: 1;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 2.5s;
         }
         h1 {
             color: #9370DB; 
@@ -61,10 +56,6 @@
             font-family: 'Courier New', Courier, monospace;
             border-top: 1px solid #9370DB;
             padding-top: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 3s;
         }
         #audioControl button {
             background-color: #4B0082;
@@ -105,83 +96,9 @@
             cursor: pointer;
             border-radius: 50%;
         }
-        /* Opening Animation Styles */
-        .loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #1e1e1e;
-            z-index: 100;
-            animation: fadeOut 0.5s ease-out forwards;
-            animation-delay: 2.3s;
-        }
-        .terminal-animation {
-            width: 80%;
-            max-width: 600px;
-        }
-        #animatedText {
-            color: #9370DB;
-            overflow: hidden;
-            white-space: pre-wrap;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .typed-cursor {
-            color: #9370DB;
-            animation: blink 0.7s infinite;
-        }
-        .cat-ascii {
-            color: #BA55D3;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-            animation-delay: 1.8s;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Opening Animation -->
-    <div class="loader-container">
-        <div class="terminal-animation">
-            <div id="animatedText"></div>
-            <pre class="cat-ascii">
-    |\__/,|   (`\
-  _.|o o  |_   ) )
-  -(((---(((--------
-            </pre>
-        </div>
-    </div>
-
     <div class="content">
         <div class="announcement">
             <div class="announcement-title">[ ANNOUNCEMENT ]</div>
@@ -242,30 +159,7 @@
             audio.volume = volumeSlider.value;
         }
 
-        // Opening animation typing effect
-        const text = "01snowy@social-links:~$ loading social profile...\n01snowy@social-links:~$ initializing...\n01snowy@social-links:~$ welcome!";
-        const animatedText = document.getElementById('animatedText');
-        let index = 0;
-        
-        function typeWriter() {
-            if (index < text.length) {
-                animatedText.innerHTML += text.charAt(index);
-                index++;
-                
-                // Random typing speed between 30ms and 100ms
-                const randomSpeed = Math.floor(Math.random() * 70) + 30;
-                setTimeout(typeWriter, randomSpeed);
-            } else {
-                // Add blinking cursor at the end
-                animatedText.innerHTML += '<span class="typed-cursor">|</span>';
-            }
-        }
-
         window.onload = function() {
-            // Start typing animation
-            setTimeout(typeWriter, 300);
-
-            // Attempt to play audio but handle autoplay restrictions
             audio.play().catch(e => {
                 console.log("Auto-play was prevented. Please use the play button to start the music.");
             });
