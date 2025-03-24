@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    <title>Snowy0Web</title>
+<meta content="Snowy0Web" property="og:title" />
+<meta content="All my links and photos!" property="og:description" />
+<meta content="https://0lsnowy.xyz" property="og:url" />
+<meta content="https://0lsnowy.xyz/images/img1.jpg" property="og:image" />
+<meta content="#43B581" data-react-helmet="true" name="theme-color" />
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,56 +60,6 @@
         .announcement-title {
             font-weight: bold;
             margin-bottom: 5px;
-        }
-        #audioControl {
-            margin-top: 20px;
-            color: #9370DB;
-            font-family: 'Courier New', Courier, monospace;
-            border-top: 1px solid #9370DB;
-            padding-top: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 3s;
-        }
-        #audioControl button {
-            background-color: #4B0082;
-            color: #E6E6FA;
-            border: 1px solid #9370DB;
-            padding: 5px 10px;
-            font-family: 'Courier New', Courier, monospace;
-            cursor: pointer;
-        }
-        #audioControl button:hover {
-            background-color: #6A5ACD;
-        }
-        #volumeSlider {
-            appearance: none;
-            width: 100%;
-            height: 5px;
-            background: #9370DB;
-            outline: none;
-            opacity: 0.7;
-            transition: opacity .2s;
-        }
-        #volumeSlider:hover {
-            opacity: 1;
-        }
-        #volumeSlider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 15px;
-            height: 15px;
-            background: #E6E6FA;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-        #volumeSlider::-moz-range-thumb {
-            width: 15px;
-            height: 15px;
-            background: #E6E6FA;
-            cursor: pointer;
-            border-radius: 50%;
         }
         /* Opening Animation Styles */
         .loader-container {
@@ -201,23 +157,12 @@ Photodump: <a href="/photodump">photodump</a>
 4. VrChat: <a href="https://vrchat.com/home/user/usr_0eec76b6-9802-4c46-8391-4243f2327b09">https://vrchat.com/home/user/usr_0eec76b6-9802-4c46-8391-4243f2327b09</a>
 5. Spotify: <a href="https://open.spotify.com/user/i35t0sjd1qyrul7d8o9zcx8vm?si=073d1ef11af7494f">https://open.spotify.com/user/i35t0sjd1qyrul7d8o9zcx8vm?si=073d1ef11af7494f</a>
 6. Beta website: <a href="/landing-page">Beta page</a>
-7. Discord: @0lsnowy
+7. Stats.fm: <a href="https://stats.fm/12ong">stats.fm/12ong</a>
+8. Discord: @0lsnowy
         </pre>
         <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">echo "Feel free to connect!"</span></p>
         <p>Feel free to connect!</p>
         <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">_</span></p>
-    </div>
-
-    <audio id="backgroundMusic" loop>
-        <source src="/Assets/ways + saturn + p4rkr _ osquinn + ericdoa - nova gang (prod. zoot & angelus) (deleted FULL song).mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <div id="audioControl">
-        <p class="prompt">01snowy@social-links:~$<span class="command"> play_music</span></p>
-        <button onclick="toggleMusic()" id="playPauseBtn">[ Play ]</button>
-        <p class="prompt">01snowy@social-links:~$<span class="command"> set_volume</span></p>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5" onchange="adjustVolume()">
     </div>
 
     <!-- Discord status-->
