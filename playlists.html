@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Collection</title>
+    <style>
+        body {
+            background-color: #0d021f;
+            color: #c792ea;
+            font-family: monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+        .embed {
+            background: #1a062b;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(199, 146, 234, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+        .embed:hover {
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>My Spotify Collection</h1>
+    <div class="container">
+        <div class="embed">
+            <iframe src="https://open.spotify.com/embed/playlist/3b0yGxkxN2M6fWwpD1QqST?si=f448681ebecf4f1f" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="embed">
+            <iframe src="https://open.spotify.com/embed/track/0YCrL5ZwmyvIwzbAVcq53A?si=1fbe058f283f465a" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="embed">
+            <iframe src="https://open.spotify.com/embed/playlist/3b0yGxkxN2M6fWwpD1QqST?si=f448681ebecf4f1f" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        </div>
+         <div class="embed">
+        <iframe src="https://open.spotify.com/embed/playlist/3b0yGxkxN2M6fWwpD1QqST?si=f448681ebecf4f1f" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+</body>
+</html>
