@@ -497,148 +497,82 @@
             2025 Snowy0Web - Made with love by 0lsnowy♡
         </footer>
     </div>
-
    <script>
-        // Opening animation typing effect
-        const text = "01snowy@social-links:~$ loading social profile...\n01snowy@social-links:~$ initializing...\n01snowy@social-links:~$ welcome!";
-        const animatedText = document.getElementById('animatedText');
-        let index = 0;
-        
-        function typeWriter() {
-            if (index < text.length) {
-                animatedText.innerHTML += text.charAt(index);
-                index++;
-                
-                // Random typing speed between 30ms and 100ms
-                const randomSpeed = Math.floor(Math.random() * 70) + 30;
-                setTimeout(typeWriter, randomSpeed);
-            } else {
-                // Add blinking cursor at the end
-                animatedText.innerHTML += '<span class="typed-cursor">|</span>';
-            }
-        }
+    const text = "01snowy@social-links:~$ loading social profile...\n01snowy@social-links:~$ initializing...\n01snowy@social-links:~$ welcome!";
+    const animatedText = document.getElementById('animatedText');
+    let index = 0;
 
-        // Discord Status Integration
-        async function fetchDiscordRPC() {
-            const userId = "850894487755554816"; 
-            try {
-                const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-                const data = await response.json();
-                
-                if (data.success) {
-                    const statusElement = document.querySelector("#discord-status .status-text");
-                    const iconElement = document.querySelector("#discord-status .status-icon");
-                    const discordData = data.data;
-                    
-                    // Default - idle status
-                    let statusText = "Currently idle.";
-                    let iconClass = "fa-solid fa-moon";
-                    let iconColor = "#ffc107"; // Yellow for idle
-                    
-                    // Status handling
-                    if (discordData.discord_status === "offline") {
-                        statusText = "Currently offline.";
-                        iconClass = "fa-solid fa-circle";
-                        iconColor = "#6c757d"; // Gray for offline
-                    } else if (discordData.discord_status === "online") {
-                        statusText = "Online";
-                        iconClass = "fa-solid fa-circle";
-                        iconColor = "#198754"; // Green for online
-                        
-                        if (discordData.activities && discordData.activities.length > 0) {
-                            const activity = discordData.activities[0];
-                            
-                            if (activity.type === 0) { // Playing
-                                statusText = `Playing ${activity.name}`;
-                                iconClass = "fa-solid fa-gamepad";
-                                iconColor = "#8a7c99"; // Theme color for activities
-                            } else if (activity.type === 2) { // Listening
-                                if (activity.details && activity.state) {
-                                    statusText = `Listening to ${activity.details} by ${activity.state}`;
-                                } else if (activity.name) {
-                                    statusText = `Listening to music on ${activity.name}`;
-                                } else {
-                                    statusText = "Listening to music";
-                                }
-                                iconClass = "fa-solid fa-music";
-                                iconColor = "#8a7c99"; // Theme color for activities
-                            } else if (activity.type === 3) { // Watching
-                                statusText = `Watching ${activity.name}`;
-                                iconClass = "fa-solid fa-tv";
-                                iconColor = "#8a7c99"; // Theme color for activities
-                            } else if (activity.type === 1) { // Streaming
-                                statusText = `Streaming ${activity.name}`;
-                                iconClass = "fa-solid fa-broadcast-tower";
-                                iconColor = "#6441a5"; // Purple for streaming
-                            } else if (activity.type === 4) { // Custom status
-                                if (activity.state) {
-                                    statusText = activity.state;
-                                } else {
-                                    statusText = "Custom status";
-                                }
-                                iconClass = "fa-solid fa-circle";
-                                iconColor = "#198754"; // Green for online
-                            } else if (activity.type === 5) { // Competing
-                                statusText = `Competing in ${activity.name}`;
-                                iconClass = "fa-solid fa-trophy";
-                                iconColor = "#8a7c99"; // Theme color for activities
-                            }
-                        }
-                    } else if (discordData.discord_status === "idle") {
-                        statusText = "Away";
-                        iconClass = "fa-solid fa-moon";
-                        iconColor = "#ffc107"; // Yellow for idle
-                    } else if (discordData.discord_status === "dnd") {
-                        statusText = "Do Not Disturb";
-                        iconClass = "fa-solid fa-circle";
-                        iconColor = "#dc3545"; // Red for DND
+    function typeWriter() {
+        if (index < text.length) {
+            animatedText.innerHTML += text.charAt(index);
+            index++;
+            const randomSpeed = Math.floor(Math.random() * 70) + 30;
+            setTimeout(typeWriter, randomSpeed);
+        } else {
+            animatedText.innerHTML += '<span class="typed-cursor">|</span>';
+        }
+    }
+    window.onload = typeWriter;
+
+    async function fetchDiscordRPC() {
+        const userId = "850894487755554816";
+        try {
+            const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+            const data = await response.json();
+
+            const statusElement = document.querySelector("#discord-status .status-text");
+            const iconElement = document.querySelector("#discord-status .status-icon");
+
+            if (!data.success) {
+                statusElement.innerText = "Failed to load Discord status.";
+                return;
+            }
+
+            const discordData = data.data;
+            let statusText = "Currently idle.";
+            let iconClass = "fa-solid fa-moon";
+            let iconColor = "#ffc107";
+
+            const status = discordData.discord_status;
+            if (status === "offline") {
+                statusText = "Currently offline.";
+                iconClass = "fa-solid fa-circle";
+                iconColor = "#6c757d";
+            } else if (status === "online" || status === "idle") {
+                statusText = "Online";
+                iconClass = "fa-solid fa-circle";
+                iconColor = "#28a745";
+            } else if (status === "dnd") {
+                statusText = "Do not disturb.";
+                iconClass = "fa-solid fa-minus-circle";
+                iconColor = "#dc3545";
+            }
+
+            // Spotify presence
+            if (discordData.listening_to_spotify && discordData.spotify) {
+                const track = discordData.spotify;
+                statusText = `♬⋆.˚Listening to ${track.song} by ${track.artist}`;
+            } else if (discordData.activities && discordData.activities.length > 0) {
+                const activity = discordData.activities.find(act => act.name !== "Custom Status");
+                if (activity && activity.name) {
+                    statusText += ` — Playing ${activity.name}`;
+                    if (activity.details) {
+                        statusText += `: ${activity.details}`;
                     }
-                    
-                    // Update DOM with cute icon for Discord activity
-                    let displayIcon = `<i class="${iconClass}" style="color: ${iconColor};"></i>`;
-                    
-                    // Add cute emoji to status
-                    if (statusText.includes("Playing")) {
-                        statusText += " ᯅ";
-                    } else if (statusText.includes("Listening")) {
-                        statusText += " ♬⋆.˚";
-                    } else if (statusText.includes("Watching")) {
-                        statusText += " 🍿";
-                    } else if (discordData.discord_status === "online") {
-                        statusText += " 𓆩♡𓆪";
-                    }
-                    
-                    // Update DOM
-                    statusElement.textContent = statusText;
-                    iconElement.innerHTML = displayIcon;
-                    
-                    // Add activity class if user is doing something
-                    const statusDetailsElement = document.querySelector("#discord-status .status-details");
-                    if (statusText.includes("Playing") || statusText.includes("Listening") || statusText.includes("Watching") || statusText.includes("Streaming")) {
-                        statusDetailsElement.classList.add("status-active");
-                    } else {
-                        statusDetailsElement.classList.remove("status-active");
-                    }
-                } else {
-                    console.error("Failed to fetch Discord RPC data.");
-                    document.querySelector("#discord-status .status-text").textContent = "Status unavailable.";
-                    document.querySelector("#discord-status .status-icon").innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #dc3545;"></i>';
                 }
-            } catch (error) {
-                console.error("Error fetching Discord status:", error);
-                document.querySelector("#discord-status .status-text").textContent = "Status unavailable.";
-                document.querySelector("#discord-status .status-icon").innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color: #dc3545;"></i>';
             }
-        }
 
-        window.onload = function() {
-            // Start typing animation
-            setTimeout(typeWriter, 300);
-            
-            // Fetch Discord status initially and then every 15 seconds
-            fetchDiscordRPC();
-            setInterval(fetchDiscordRPC, 15000);
+            statusElement.innerText = statusText;
+            iconElement.innerHTML = `<i class="${iconClass}" style="color: ${iconColor};"></i>`;
+
+        } catch (error) {
+            console.error("Failed to fetch Discord RPC:", error);
+            document.querySelector("#discord-status .status-text").innerText = "Error loading Discord status.";
         }
-    </script>
+    }
+
+    fetchDiscordRPC();
+    setInterval(fetchDiscordRPC, 15000); // Refresh every 15s
+</script>
 </body>
 </html>
