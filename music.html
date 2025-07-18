@@ -328,6 +328,25 @@
         .status-text {
             flex: 1;
         }
+
+        /* Genre filter button styles */
+        .genre-btn {
+            background: var(--card-bg);
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 7px 18px;
+            margin: 5px 7px 5px 0;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background var(--animation-speed), color var(--animation-speed), border-color var(--animation-speed);
+        }
+        .genre-btn:hover, .genre-btn.active {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border-color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
@@ -354,6 +373,20 @@
 <div class="terminal-module" id="spotify-module">
   <p><span class="prompt">01snowy@spotify-recs:~$</span> <span class="command">cat spotify_recommendations.json</span></p>
 
+  <!-- Song of the Month Section -->
+<div class="terminal-module" id="song-of-the-month" style="margin-bottom: 30px;">
+  <h2 style="color: var(--accent-color);">⋆｡˚☽ Song of the Month</h2>
+  <div class="social-card">
+    <div class="social-icon" style="background-image: url('https://i.scdn.co/image/ab67616d0000b273b2e99fb5c865e6c6464bf6ac'); background-size: cover; background-position: center;"></div>
+    <div class="social-info">
+      <div class="social-name">Asheville</div>
+      <div class="social-link">glaive — <em>Hyperpop</em></div>
+      <a href="https://open.spotify.com/album/2H4P4WK9JJKAe7pRtW1sIa?si=APFGDX9LSoaMG8jGFXTvQg" target="_blank">Listen</a>
+    </div>
+  </div>
+</div>
+<!-- End Song of the Month Section -->
+
   <h2 style="margin-top: 20px; color: var(--accent-color);">⋆｡˚☽ Playlists</h2>
   <div id="playlist-list" class="social-grid" style="margin-bottom: 30px;"></div>
 
@@ -370,8 +403,8 @@
   const genres = [...new Set(spotifySongs.map(song => song.genre))];
 
   function renderFilters() {
-    filtersContainer.innerHTML = `<button onclick="filterSongs('All')" style="margin: 5px;">All</button>` +
-      genres.map(g => `<button onclick="filterSongs('${g}')" style="margin: 5px;">${g}</button>`).join('');
+    filtersContainer.innerHTML = `<button class="genre-btn" onclick="filterSongs('All')">All</button>` +
+      genres.map(g => `<button class="genre-btn" onclick="filterSongs('${g}')">${g}</button>`).join('');
   }
 
   function filterSongs(genre) {
