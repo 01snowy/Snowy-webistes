@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Snowy0Web Beta</title>
+	<meta content="Snowy0Web" property="og:title" />
+	<meta content="All my links and photos!" property="og:description" />
+	<meta content="https://0lsnowy.xyz" property="og:url" />
+	<meta content="https://0lsnowy.xyz/images/img1.jpg" property="og:image" />
+	<meta content="#221736" data-react-helmet="true" name="theme-color" />
+	<script src="https://kit.fontawesome.com/9f2249c235.js" crossorigin="anonymous"></script>
+	<style>
+		:root {
+			--bg-color: #000000;
+			--card-bg: #161515;
+			--text-primary: #ffffff;
+			--text-secondary: #bbbbbb;
+			--accent-color: #ffffff;
+			--accent-hover: #a39090;
+			--border-color: #333333;
+			--animation-speed: 0.3s;
+		}
+		body {
+			background-color: var(--bg-color);
+			color: var(--text-primary);
+			font-family: 'Courier New', Courier, monospace;
+			min-height: 100vh;
+			margin: 0;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		.enter-overlay {
+			position: fixed;
+			top: 0; left: 0; right: 0; bottom: 0;
+			background: rgba(0,0,0,0.95);
+			z-index: 9999;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			color: var(--accent-color);
+			font-family: 'Courier New', Courier, monospace;
+			transition: opacity 0.5s;
+		}
+		.enter-btn {
+			background: var(--accent-color);
+			color: var(--bg-color);
+			border: none;
+			border-radius: 8px;
+			padding: 16px 32px;
+			font-size: 1.5rem;
+			cursor: pointer;
+			margin-top: 32px;
+			transition: background 0.3s;
+		}
+		.enter-btn:hover {
+			background: var(--accent-hover);
+		}
+		.cat-ascii {
+			text-align: center;
+			margin: 30px 0;
+			color: var(--text-primary);
+		}
+		.music-player {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			background: var(--card-bg);
+			border: 1px solid var(--border-color);
+			border-radius: 12px;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+			padding: 12px 18px;
+			display: flex;
+			align-items: center;
+			min-width: 260px;
+			z-index: 1000;
+		}
+		.music-meta {
+			flex: 1;
+			margin-left: 12px;
+			color: var(--text-primary);
+		}
+		.music-controls button {
+			background: none;
+			border: none;
+			color: var(--accent-color);
+			font-size: 1.2rem;
+			margin: 0 6px;
+			cursor: pointer;
+		}
+		.music-controls button:disabled {
+			color: var(--border-color);
+			cursor: not-allowed;
+		}
+		.music-title {
+			font-weight: bold;
+			font-size: 1rem;
+		}
+		.music-artist {
+			font-size: 0.9rem;
+			color: var(--text-secondary);
+		}
+		.music-progress {
+			width: 100%;
+			height: 4px;
+			background: var(--border-color);
+			border-radius: 2px;
+			margin: 8px 0;
+			overflow: hidden;
+		}
+		.music-progress-bar {
+			height: 100%;
+			background: var(--accent-color);
+			width: 0%;
+			transition: width 0.2s;
+		}
+		.music-volume {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin-top: 6px;
+		}
+		.music-volume input[type=range] {
+			width: 80px;
+		}
+	</style>
+</head>
+<body>
+	<!-- Click to Enter Overlay -->
+	<div class="enter-overlay" id="enterOverlay">
+		<h1>Welcome to Snowy0Web Beta</h1>
+		<button class="enter-btn" onclick="enterSite()">Click to Enter</button>
+		<pre class="cat-ascii">
+	|\__/,|   (`\
+  _.|o o  |_   ) )
+  -(((---(((--------
+		</pre>
+	</div>
+
+	<!-- Main Content -->
+	<div class="container" id="mainContent" style="display:none;">
+		<header>
+			<h1>Snowy0Web Beta</h1>
+			<p>All my links ♡</p>
+		</header>
+		<!-- You can copy the rest of your index.html content here if needed -->
+		<footer>
+			2025 Snowy0Web - Made with love by 0lsnowy♡
+		</footer>
+	</div>
+
+	<!-- Music Player -->
+	<div class="music-player" id="musicPlayer" style="display:none;">
+		<div class="music-controls">
+			<button id="prevBtn" title="Previous"><i class="fa-solid fa-backward"></i></button>
+			<button id="playPauseBtn" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
+			<button id="nextBtn" title="Next"><i class="fa-solid fa-forward"></i></button>
+		</div>
+		<div class="music-meta">
+			<div class="music-title" id="musicTitle">Title</div>
+			<div class="music-artist" id="musicArtist">Artist</div>
+			<div class="music-progress"><div class="music-progress-bar" id="musicProgressBar"></div></div>
+			<div class="music-volume">
+				<i class="fa-solid fa-volume-low"></i>
+				<input type="range" id="volumeSlider" min="0" max="100" value="50">
+				<i class="fa-solid fa-volume-high"></i>
+			</div>
+		</div>
+		<audio id="audioPlayer" preload="metadata"></audio>
+	</div>
+
+	<script>
+	// Click to enter logic
+	function enterSite() {
+		document.getElementById('enterOverlay').style.opacity = 0;
+		setTimeout(() => {
+			document.getElementById('enterOverlay').style.display = 'none';
+			document.getElementById('mainContent').style.display = '';
+			document.getElementById('musicPlayer').style.display = '';
+			// Start playing music automatically after entering
+			playTrack(currentTrack);
+			audioPlayer.volume = 0.5;
+		}, 500);
+	}
+
+	// Music player logic
+	const musicFiles = [
+		{ file: '/Music/06. Butterflies (Feat. Scruff).mp3', title: 'Butterflies (Feat. Scruff)', artist: '' },
+		{ file: '/Music/20. Kensuke [Loading Theme].mp3', title: 'Kensuke [Loading Theme]', artist: '' }
+	];
+	let currentTrack = 0;
+	const audioPlayer = document.getElementById('audioPlayer');
+	const playPauseBtn = document.getElementById('playPauseBtn');
+	const prevBtn = document.getElementById('prevBtn');
+	const nextBtn = document.getElementById('nextBtn');
+	const musicTitle = document.getElementById('musicTitle');
+	const musicArtist = document.getElementById('musicArtist');
+	const musicProgressBar = document.getElementById('musicProgressBar');
+	const volumeSlider = document.getElementById('volumeSlider');
+
+
+	function loadTrack(index) {
+		const track = musicFiles[index];
+		audioPlayer.src = track.file;
+		musicTitle.textContent = track.title;
+		musicArtist.textContent = track.artist || 'Unknown Artist';
+		audioPlayer.load();
+		updateProgressBar();
+		playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+		audioPlayer.volume = volumeSlider.value / 100;
+	}
+
+	function playTrack(index) {
+		loadTrack(index);
+		audioPlayer.play();
+		playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+	}
+
+	function playPause() {
+		if (audioPlayer.paused) {
+			audioPlayer.play();
+			playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+		} else {
+			audioPlayer.pause();
+			playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+		}
+	}
+
+	function nextTrack() {
+		currentTrack = (currentTrack + 1) % musicFiles.length;
+		playTrack(currentTrack);
+	}
+
+	function prevTrack() {
+		currentTrack = (currentTrack - 1 + musicFiles.length) % musicFiles.length;
+		playTrack(currentTrack);
+	}
+
+	function updateProgressBar() {
+		if (audioPlayer.duration) {
+			const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+			musicProgressBar.style.width = percent + '%';
+		} else {
+			musicProgressBar.style.width = '0%';
+		}
+	}
+
+	// Volume slider logic
+	volumeSlider.addEventListener('input', function() {
+		audioPlayer.volume = volumeSlider.value / 100;
+	});
+
+	audioPlayer.addEventListener('timeupdate', updateProgressBar);
+	audioPlayer.addEventListener('ended', nextTrack);
+	playPauseBtn.addEventListener('click', playPause);
+	nextBtn.addEventListener('click', nextTrack);
+	prevBtn.addEventListener('click', prevTrack);
+
+	// Try to read metadata from audio file (if available)
+	audioPlayer.addEventListener('loadedmetadata', function() {
+		// If you want to use metadata from the file, you can use audioPlayer.duration, etc.
+	});
+
+	// Initial load
+	loadTrack(currentTrack);
+	</script>
+</body>
+</html>
