@@ -1,6 +1,6 @@
 body {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #FFF0F5;  /* Light pink background */
+    color: #DB7093;  /* Pale violet red text */
     font-family: 'Courier New', Courier, monospace;
     line-height: 1.6;
     padding: 20px;
@@ -9,19 +9,20 @@ body {
 }
 
 a {
-    color: #ffffff;
+    color: #C71585;  /* Medium violet red for links */
     text-decoration: none;
     transition: color 0.3s;
 }
 
 a:hover {
-    color: #a39090;
+    color: #FF69B4;  /* Hot pink for hover */
     text-decoration: underline;
 }
 
 h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: #DB7093;  /* Pale violet red for headings */
 }
 
 ul {
@@ -31,6 +32,15 @@ ul {
 
 li {
     margin-bottom: 1rem;
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid #FFC0CB;  /* Pink border */
     padding-bottom: 1rem;
+    background-color: #FFE4E1;  /* Misty rose background for list items */
+    padding: 1rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(219, 112, 147, 0.2);  /* Soft pink shadow */
 }
