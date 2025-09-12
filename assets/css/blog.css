@@ -44,3 +44,48 @@ li:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(219, 112, 147, 0.2);  /* Soft pink shadow */
 }
+
+.post-list {
+    list-style: none;
+    padding: 0;
+}
+
+.post-item {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #FFE4E1;
+    border-radius: 8px;
+    border-bottom: 1px solid #FFC0CB;
+}
+
+.post-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+}
+
+.post-date {
+    display: block;
+    color: #C71585;
+    margin-bottom: 1rem;
+}
+
+.post-excerpt {
+    margin: 1rem 0;
+    line-height: 1.6;
+    color: #DB7093;
+}
+
+.read-more-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #FF69B4;
+    color: #FFF0F5;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.read-more-btn:hover {
+    background-color: #DB7093;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
