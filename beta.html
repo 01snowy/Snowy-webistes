@@ -366,23 +366,6 @@
             flex: 1;
         }
 
-        /* Add these styles after your existing animations */
-        .hex-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .hex-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
         /* Update the wave-canvas styles */
         .ps3-wave {
             position: fixed;
@@ -390,28 +373,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: -1; /* Changed from -2 to -1 since hex animation is removed */
             opacity: 0.15;
         }
 
-        .wave-canvas, .hex-canvas {
-            position: fixed;  /* Change from absolute to fixed */
+        .wave-canvas {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
         }
-
-        .prompt-highlight {
-            color: #007bff;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
-    <div class="hex-animation">
-        <canvas class="hex-canvas" id="hexCanvas"></canvas>
-    </div>
     <div class="ps3-wave">
         <canvas class="wave-canvas" id="waveCanvas"></canvas>
     </div>
@@ -704,100 +679,6 @@
 
     fetchDiscordRPC();
     setInterval(fetchDiscordRPC, 15000); // Refresh every 15s
-
-    // Add this before your existing scripts
-    class Point {
-        constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.baseX = x;
-            this.baseY = y;
-            this.velocity = {
-                x: (Math.random() - 0.5) * 2,
-                y: (Math.random() - 0.5) * 2
-            };
-            this.maxDistance = 100;
-        }
-
-        update() {
-            this.x += this.velocity.x;
-            this.y += this.velocity.y;
-
-            if (Math.abs(this.x - this.baseX) > this.maxDistance) {
-                this.velocity.x *= -1;
-            }
-            if (Math.abs(this.y - this.baseY) > this.maxDistance) {
-                this.velocity.y *= -1;
-            }
-        }
-    }
-
-    function initHexAnimation() {
-        const canvas = document.getElementById('hexCanvas');
-        const ctx = canvas.getContext('2d');
-        const points = [];
-        let animationFrameId;
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        function createPoints() {
-            const gridSize = 70;
-            const numColumns = Math.ceil(canvas.width / gridSize);
-            const numRows = Math.ceil(canvas.height / gridSize);
-
-            for (let i = 0; i < numColumns; i++) {
-                for (let j = 0; j < numRows; j++) {
-                    const x = i * gridSize + (j % 2) * (gridSize / 2);
-                    const y = j * (gridSize * 0.866); // Hexagonal spacing
-                    points.push(new Point(x, y));
-                }
-            }
-        }
-
-        function drawHexGrid() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-            ctx.lineWidth = 0.5;
-
-            points.forEach(point => {
-                point.update();
-                
-                points.forEach(otherPoint => {
-                    const distance = Math.hypot(point.x - otherPoint.x, point.y - otherPoint.y);
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.moveTo(point.x, point.y);
-                        ctx.lineTo(otherPoint.x, otherPoint.y);
-                        ctx.stroke();
-                    }
-                });
-
-                ctx.beginPath();
-                ctx.arc(point.x, point.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-                ctx.fill();
-            });
-
-            animationFrameId = requestAnimationFrame(drawHexGrid);
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-        createPoints();
-        drawHexGrid();
-
-        // Clean up function
-        return () => {
-            window.removeEventListener('resize', resize);
-            cancelAnimationFrame(animationFrameId);
-        };
-    }
-
-    // Initialize the animation when the page loads
-    window.addEventListener('load', initHexAnimation);
 
     function initPS3Wave() {
         const canvas = document.getElementById('waveCanvas');
