@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snowy0Web Beta</title>
+    <title>Snowy0Web</title>
     <meta content="Snowy0Web" property="og:title" />
     <meta content="All my links and photos!" property="og:description" />
     <meta content="https://0lsnowy.xyz" property="og:url" />
@@ -20,6 +20,8 @@
             --accent-hover: #a39090;
             --border-color: #333333;
             --animation-speed: 0.3s;
+            --particle-color: rgba(255, 255, 255, 0.1);
+            --particle-size: 2px;
         }
 
         * {
@@ -39,6 +41,8 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
+            backdrop-filter: blur(1px);
         }
 
         .container {
@@ -220,6 +224,39 @@
             font-size: 0.9rem;
         }
 
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--particle-color);
+            border-radius: 50%;
+            width: var(--particle-size);
+            height: var(--particle-size);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -261,144 +298,123 @@
             }
         }
 
-        /* Enter Overlay */
-        .enter-overlay {
+        /* Custom toggle for dark mode */
+        .theme-switch {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--bg-color);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-family: 'Courier New', Courier, monospace;
-            transition: opacity var(--animation-speed);
+            top: 20px;
+            right: 20px;
+            z-index: 999;
         }
 
-        .enter-btn {
+        .theme-switch button {
             background-color: var(--card-bg);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px 32px;
-            font-size: 1.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            margin-top: 32px;
-            transition: all var(--animation-speed);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .enter-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            border-color: var(--accent-color);
-        }
-
-        /* Music Player */
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            padding: 12px 18px;
             display: flex;
             align-items: center;
-            min-width: 260px;
-            z-index: 1000;
-            transition: transform var(--animation-speed), box-shadow var(--animation-speed);
+            justify-content: center;
+            transition: all var(--animation-speed);
         }
 
-        .music-player:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        .theme-switch button:hover {
+            background-color: var(--accent-color);
         }
 
-        .music-meta {
-            flex: 1;
-            margin-left: 12px;
-            color: var(--text-primary);
+        /* Module specific styles */
+        .photodump-preview {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
         }
 
-        .music-controls button {
-            background: none;
-            border: none;
-            color: var(--accent-color);
-            font-size: 1.2rem;
-            margin: 0 6px;
-            cursor: pointer;
-            transition: color var(--animation-speed), transform var(--animation-speed);
+        .preview-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform var(--animation-speed);
         }
 
-        .music-controls button:hover {
-            color: var(--accent-hover);
+        .preview-img:hover {
             transform: scale(1.1);
         }
 
-        .music-controls button:disabled {
-            color: var(--border-color);
-            cursor: not-allowed;
+        /* Discord status styling */
+        #discord-status {
+            display: flex;
+            flex-direction: column;
         }
 
-        .music-title {
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 2px;
-        }
-
-        .music-artist {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .music-progress {
-            width: 100%;
-            height: 4px;
-            background: var(--border-color);
-            border-radius: 2px;
-            margin: 8px 0;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .music-progress-bar {
-            height: 100%;
-            background: var(--accent-color);
-            width: 0%;
-            transition: width 0.1s linear;
-        }
-
-        .music-volume {
+        .status-details {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 6px;
+            margin-top: 5px;
         }
 
-        .music-volume input[type=range] {
-            width: 80px;
-            accent-color: var(--accent-color);
+        .status-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .status-text {
+            flex: 1;
+        }
+
+        /* Add these styles after your existing animations */
+        .hex-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .hex-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Update the wave-canvas styles */
+        .ps3-wave {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.15;
+        }
+
+        .wave-canvas, .hex-canvas {
+            position: fixed;  /* Change from absolute to fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .prompt-highlight {
+            color: #007bff;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <!-- Click to Enter Overlay -->
-    <div class="enter-overlay" id="enterOverlay">
-        <h1>Welcome to Snowy0Web Beta</h1>
-        <pre class="cat-ascii">
-    |\__/,|   (`\
-  _.|o o  |_   ) )
-  -(((---(((--------
-        </pre>
-        <button class="enter-btn" onclick="enterSite()">Click to Enter ♡</button>
+    <div class="hex-animation">
+        <canvas class="hex-canvas" id="hexCanvas"></canvas>
     </div>
-
+    <div class="ps3-wave">
+        <canvas class="wave-canvas" id="waveCanvas"></canvas>
+    </div>
     <!-- Opening Animation -->
     <div class="loader-container">
         <div class="terminal-animation">
@@ -412,7 +428,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="container" id="mainContent" style="display: none;">
+    <div class="container">
         <header>
             <h1>Snowy0Web</h1>
             <p>All my links ♡</p>
@@ -426,7 +442,7 @@
             </div>
             <div class="announcement-content">Added music rec site:3 ♡</div>
         </div>
-
+       
         <!-- Discord Status Module -->
         <div id="discord-status" class="announcement">
             <div class="announcement-title">
@@ -489,14 +505,14 @@
                 </div>
             </div>
             
-            <!-- YouTube -->
+            <!-- GitHub -->
             <div class="social-card">
                 <div class="social-icon">
-                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-solid fa-blog"></i>
                 </div>
                 <div class="social-info">
-                    <div class="social-name">YouTube</div>
-                    <a href="https://www.youtube.com/@Snowy00_x" class="social-link">@Snowy00_x</a>
+                    <div class="social-name">My Blog</div>
+                    <a href="/blog" class="social-link">Here</a>
                 </div>
             </div>
             
@@ -554,6 +570,7 @@
                 </div>
             </div>
             
+
             <!-- BlueSky -->
             <div class="social-card">
                 <div class="social-icon">
@@ -586,206 +603,260 @@
             2025 Snowy0Web - Made with love by 0lsnowy♡
         </footer>
     </div>
+   <script>
+    const text = `[system] > Initializing system...
+[system] > Loading profile data...
+[system] > Establishing connection...
+[success] > Welcome to Snowy's terminal!
+[system] > Type 'help' for commands...`;
+    const animatedText = document.getElementById('animatedText');
+    let index = 0;
 
-    <!-- Music Player -->
-    <div class="music-player" id="musicPlayer" style="display: none;">
-        <div class="music-controls">
-            <button id="prevBtn" onclick="prevTrack()" title="Previous"><i class="fa-solid fa-backward"></i></button>
-            <button id="playPauseBtn" onclick="playPause()" title="Play/Pause"><i class="fa-solid fa-play"></i></button>
-            <button id="nextBtn" onclick="nextTrack()" title="Next"><i class="fa-solid fa-forward"></i></button>
-        </div>
-        <div class="music-meta">
-            <div class="music-title" id="musicTitle">No track loaded</div>
-            <div class="music-artist" id="musicArtist">-</div>
-            <div class="music-progress"><div class="music-progress-bar" id="musicProgressBar"></div></div>
-            <div class="music-volume">
-                <i class="fa-solid fa-volume-low"></i>
-                <input type="range" id="volumeSlider" min="0" max="100" value="50">
-                <i class="fa-solid fa-volume-high"></i>
-            </div>
-        </div>
-        <audio id="audioPlayer" preload="metadata"></audio>
-    </div>
-
-    <script>
-        // Click to enter logic
-        function enterSite() {
-            document.getElementById('enterOverlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('enterOverlay').style.display = 'none';
-                document.getElementById('mainContent').style.display = '';
-                document.getElementById('musicPlayer').style.display = '';
-                // Start playing music automatically after entering
-                loadTrack(0);
-            }, 500);
-        }
-
-        // Animated text
-        const text = "01snowy@social-links:~$ loading social profile...\n01snowy@social-links:~$ initializing...\n01snowy@social-links:~$ welcome!";
-        const animatedText = document.getElementById('animatedText');
-        let index = 0;
-
-        function typeWriter() {
-            if (index < text.length) {
-                animatedText.innerHTML += text.charAt(index);
-                index++;
-                const randomSpeed = Math.floor(Math.random() * 70) + 30;
-                setTimeout(typeWriter, randomSpeed);
-            } else {
-                animatedText.innerHTML += '<span class="typed-cursor">|</span>';
-            }
-        }
-
-        window.onload = typeWriter;
-
-        // Music player logic
-        const musicFiles = [
-            { file: '/Music/06. Butterflies (Feat. Scruff).mp3', title: 'Butterflies (Feat. Scruff)', artist: 'Keaton' },
-            { file: '/Music/20. Kensuke [Loading Theme].mp3', title: 'Kensuke [Loading Theme]', artist: 'Little Nemo' }
-        ];
-        let currentTrack = 0;
-        let isPlaying = false;
-
-        const audioPlayer = document.getElementById('audioPlayer');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const musicTitle = document.getElementById('musicTitle');
-        const musicArtist = document.getElementById('musicArtist');
-        const musicProgressBar = document.getElementById('musicProgressBar');
-        const volumeSlider = document.getElementById('volumeSlider');
-
-        function loadTrack(index) {
-            if (index < 0) index = musicFiles.length - 1;
-            if (index >= musicFiles.length) index = 0;
+    function typeWriter() {
+        if (index < text.length) {
+            const currentChar = text.charAt(index);
             
-            currentTrack = index;
-            const track = musicFiles[currentTrack];
-            
-            audioPlayer.src = track.file;
-            musicTitle.textContent = track.title;
-            musicArtist.textContent = track.artist;
-            audioPlayer.load();
-            updateProgressBar();
-            
-            if (isPlaying) {
-                playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                audioPlayer.play();
+            // Format the text with highlighting
+            let formattedText = animatedText.innerHTML;
+            if (currentChar === '\n') {
+                formattedText += '<br>';
             } else {
-                playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-            }
-            
-            audioPlayer.volume = volumeSlider.value / 100;
-        }
-
-        function playPause() {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                isPlaying = true;
-                playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            } else {
-                audioPlayer.pause();
-                isPlaying = false;
-                playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-            }
-        }
-
-        function nextTrack() {
-            loadTrack((currentTrack + 1) % musicFiles.length);
-            if (isPlaying) audioPlayer.play();
-        }
-
-        function prevTrack() {
-            loadTrack(currentTrack - 1 < 0 ? musicFiles.length - 1 : currentTrack - 1);
-            if (isPlaying) audioPlayer.play();
-        }
-
-        function updateProgressBar() {
-            if (audioPlayer.duration) {
-                const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                musicProgressBar.style.width = percent + '%';
-            } else {
-                musicProgressBar.style.width = '0%';
-            }
-        }
-
-        function updateVolume() {
-            audioPlayer.volume = volumeSlider.value / 100;
-        }
-
-        function seekTo(e) {
-            const progressContainer = document.querySelector('.music-progress');
-            const rect = progressContainer.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            audioPlayer.currentTime = pos * audioPlayer.duration;
-        }
-
-        // Event Listeners
-        audioPlayer.addEventListener('timeupdate', updateProgressBar);
-        audioPlayer.addEventListener('ended', nextTrack);
-        volumeSlider.addEventListener('input', updateVolume);
-        document.querySelector('.music-progress').addEventListener('click', seekTo);
-
-        // Discord Status
-        async function fetchDiscordRPC() {
-            const userId = "850894487755554816";
-            try {
-                const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-                const data = await response.json();
-
-                const statusElement = document.querySelector("#discord-status .status-text");
-                const iconElement = document.querySelector("#discord-status .status-icon");
-
-                if (!data.success) {
-                    statusElement.innerText = "Failed to load Discord status.";
-                    return;
+                // Add highlighting for different parts
+                if (text.substring(index).startsWith('[system]')) {
+                    formattedText += '<span class="prompt-highlight">[system]</span>';
+                    index += 7; // Skip the [system] part
+                } else if (text.substring(index).startsWith('[success]')) {
+                    formattedText += '<span style="color: #28a745">[success]</span>';
+                    index += 8; // Skip the [success] part
+                } else {
+                    formattedText += currentChar;
                 }
+            }
+            
+            animatedText.innerHTML = formattedText;
+            index++;
+            
+            // Random typing speed between 30ms and 100ms
+            const randomSpeed = Math.floor(Math.random() * 70) + 30;
+            setTimeout(typeWriter, randomSpeed);
+        } else {
+            animatedText.innerHTML += '<span class="typed-cursor">█</span>';
+        }
+    }
+    window.onload = typeWriter;
 
-                const discordData = data.data;
-                let statusText = "Currently idle.";
-                let iconClass = "fa-solid fa-moon";
-                let iconColor = "#ffc107";
+    async function fetchDiscordRPC() {
+        const userId = "850894487755554816";
+        try {
+            const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+            const data = await response.json();
 
-                const status = discordData.discord_status;
-                if (status === "offline") {
-                    statusText = "Currently offline.";
-                    iconClass = "fa-solid fa-circle";
-                    iconColor = "#6c757d";
-                } else if (status === "online" || status === "idle") {
-                    statusText = "Online";
-                    iconClass = "fa-solid fa-circle";
-                    iconColor = "#28a745";
-                } else if (status === "dnd") {
-                    statusText = "Do not disturb.";
-                    iconClass = "fa-solid fa-minus-circle";
-                    iconColor = "#dc3545";
-                }
+            const statusElement = document.querySelector("#discord-status .status-text");
+            const iconElement = document.querySelector("#discord-status .status-icon");
 
-                // Spotify presence
-                if (discordData.listening_to_spotify && discordData.spotify) {
-                    const track = discordData.spotify;
-                    statusText = `♬⋆.˚Listening to ${track.song} by ${track.artist}`;
-                } else if (discordData.activities && discordData.activities.length > 0) {
-                    const activity = discordData.activities.find(act => act.name !== "Custom Status");
-                    if (activity && activity.name) {
-                        statusText += ` — Playing ${activity.name}`;
-                        if (activity.details) {
-                            statusText += `: ${activity.details}`;
-                        }
+            if (!data.success) {
+                statusElement.innerText = "Failed to load Discord status.";
+                return;
+            }
+
+            const discordData = data.data;
+            let statusText = "Currently idle.";
+            let iconClass = "fa-solid fa-moon";
+            let iconColor = "#ffc107";
+
+            const status = discordData.discord_status;
+            if (status === "offline") {
+                statusText = "Currently offline.";
+                iconClass = "fa-solid fa-circle";
+                iconColor = "#6c757d";
+            } else if (status === "online" || status === "idle") {
+                statusText = "Online";
+                iconClass = "fa-solid fa-circle";
+                iconColor = "#28a745";
+            } else if (status === "dnd") {
+                statusText = "Do not disturb.";
+                iconClass = "fa-solid fa-minus-circle";
+                iconColor = "#dc3545";
+            }
+
+            // Spotify presence
+            if (discordData.listening_to_spotify && discordData.spotify) {
+                const track = discordData.spotify;
+                statusText = `♬⋆.˚Listening to ${track.song} by ${track.artist}`;
+            } else if (discordData.activities && discordData.activities.length > 0) {
+                const activity = discordData.activities.find(act => act.name !== "Custom Status");
+                if (activity && activity.name) {
+                    statusText += ` — Playing ${activity.name}`;
+                    if (activity.details) {
+                        statusText += `: ${activity.details}`;
                     }
                 }
+            }
 
-                statusElement.innerText = statusText;
-                iconElement.innerHTML = `<i class="${iconClass}" style="color: ${iconColor};"></i>`;
+            statusElement.innerText = statusText;
+            iconElement.innerHTML = `<i class="${iconClass}" style="color: ${iconColor};"></i>`;
 
-            } catch (error) {
-                console.error("Failed to fetch Discord RPC:", error);
-                document.querySelector("#discord-status .status-text").innerText = "Error loading Discord status.";
+        } catch (error) {
+            console.error("Failed to fetch Discord RPC:", error);
+            document.querySelector("#discord-status .status-text").innerText = "Error loading Discord status.";
+        }
+    }
+
+    fetchDiscordRPC();
+    setInterval(fetchDiscordRPC, 15000); // Refresh every 15s
+
+    // Add this before your existing scripts
+    class Point {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.baseX = x;
+            this.baseY = y;
+            this.velocity = {
+                x: (Math.random() - 0.5) * 2,
+                y: (Math.random() - 0.5) * 2
+            };
+            this.maxDistance = 100;
+        }
+
+        update() {
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+
+            if (Math.abs(this.x - this.baseX) > this.maxDistance) {
+                this.velocity.x *= -1;
+            }
+            if (Math.abs(this.y - this.baseY) > this.maxDistance) {
+                this.velocity.y *= -1;
+            }
+        }
+    }
+
+    function initHexAnimation() {
+        const canvas = document.getElementById('hexCanvas');
+        const ctx = canvas.getContext('2d');
+        const points = [];
+        let animationFrameId;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createPoints() {
+            const gridSize = 70;
+            const numColumns = Math.ceil(canvas.width / gridSize);
+            const numRows = Math.ceil(canvas.height / gridSize);
+
+            for (let i = 0; i < numColumns; i++) {
+                for (let j = 0; j < numRows; j++) {
+                    const x = i * gridSize + (j % 2) * (gridSize / 2);
+                    const y = j * (gridSize * 0.866); // Hexagonal spacing
+                    points.push(new Point(x, y));
+                }
             }
         }
 
-        fetchDiscordRPC();
-        setInterval(fetchDiscordRPC, 15000); // Refresh every 15s
-    </script>
+        function drawHexGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 0.5;
+
+            points.forEach(point => {
+                point.update();
+                
+                points.forEach(otherPoint => {
+                    const distance = Math.hypot(point.x - otherPoint.x, point.y - otherPoint.y);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(point.x, point.y);
+                        ctx.lineTo(otherPoint.x, otherPoint.y);
+                        ctx.stroke();
+                    }
+                });
+
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.fill();
+            });
+
+            animationFrameId = requestAnimationFrame(drawHexGrid);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        createPoints();
+        drawHexGrid();
+
+        // Clean up function
+        return () => {
+            window.removeEventListener('resize', resize);
+            cancelAnimationFrame(animationFrameId);
+        };
+    }
+
+    // Initialize the animation when the page loads
+    window.addEventListener('load', initHexAnimation);
+
+    function initPS3Wave() {
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+        let animationFrameId;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        /* Update the wave animation position and add theme styling */
+        function drawWave() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update gradient colors to match theme
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, 'rgba(51, 51, 51, 0.3)');
+            gradient.addColorStop(0.5, 'rgba(163, 144, 144, 0.2)');
+            gradient.addColorStop(1, 'rgba(51, 51, 51, 0.3)');
+
+            // Draw multiple waves with higher position
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height * 0.3); // Changed from 0.5 to 0.3
+
+                for (let x = 0; x < canvas.width; x += 10) {
+                    const y = Math.sin(x * 0.002 + time + i * 0.5) * 70 + canvas.height * 0.4; // Changed from 0.6 to 0.4
+                    ctx.lineTo(x, y);
+                }
+
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.lineTo(canvas.width, canvas.height + 100);
+                ctx.lineTo(0, canvas.height + 100);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+
+            time += 0.015;
+            animationFrameId = requestAnimationFrame(drawWave);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        drawWave();
+
+        // Clean up function
+        return () => {
+            window.removeEventListener('resize', resize);
+            cancelAnimationFrame(animationFrameId);
+        };
+    }
+
+    // Initialize the wave animation when the page loads
+    window.addEventListener('load', initPS3Wave);
+</script>
 </body>
 </html>
