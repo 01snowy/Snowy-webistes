@@ -222,7 +222,39 @@
             height: 100%;
         }
 
-        /* Media Queries */
+        /* Tech Stack Styles */
+.tech-stack {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.tech-stack i {
+    font-size: 2rem;
+    color: var(--text-primary);
+    transition: transform var(--animation-speed), color var(--animation-speed);
+}
+
+.tech-stack i:hover {
+    transform: scale(1.2);
+    color: var(--accent-hover);
+}
+
+/* Add specific colors for each icon */
+.fa-file-code:hover {
+    color: #9d5874;
+}
+
+.fa-css:hover {
+    color: #4d6d8a;
+}
+
+.fa-python:hover {
+    color: #8e4d2a;
+}
+
+/* Media Queries */
         @media (max-width: 1024px) {
             .top-row {
                 grid-template-columns: 1fr;
@@ -398,6 +430,11 @@
                 <div class="about-me">
                     <p>Hey, Im a 19 y/o 1 trick pony web developer from the United States. i have 4 cat :3. I make all my websites from scratch with some help from ai :3. I use lanyard api for my discord rpc. I have a decent home lab...</p>     
                     <p>(～﹃～)~zZ.  </p>
+                    <div class="tech-stack">
+                        <i class="fa-brands fa-html5" title="HTML5"></i>
+                        <i class="fa-brands fa-css3-alt" title="CSS3"></i>
+                        <i class="fa-brands fa-python" title="Python"></i>
+                    </div>
                 </div>
             </div>
 
@@ -424,6 +461,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="tech-stack">
+            <i class="fa-brands fa-file-code" title="HTML5"></i>
+            <i class="fa-brands fa-css" title="CSS3"></i>
+            <i class="fa-brands fa-python" title="Python"></i>
         </div>
     </div>
 
