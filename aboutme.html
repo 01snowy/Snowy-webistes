@@ -191,6 +191,12 @@
             overflow: hidden;
             border-radius: 12px;
             border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform var(--animation-speed);
+        }
+
+        .picture-container:hover {
+            transform: scale(1.02);
         }
 
         .picture-container img {
@@ -252,6 +258,50 @@
 
 .fa-python:hover {
     color: #8e4d2a;
+}
+
+/* Modal styles */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.close-modal {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    color: var(--text-primary);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Animation for modal */
+@keyframes zoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+.modal-content {
+    animation-name: zoom;
+    animation-duration: 0.6s;
 }
 
 /* Media Queries */
@@ -470,6 +520,12 @@
         </div>
     </div>
 
+    <!-- Image Modal -->
+<div class="image-modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
     <script>
         // PS3 Wave Animation
         function initPS3Wave() {
@@ -604,6 +660,60 @@ setInterval(updateAllClocks, 1000);
 
         updateClock();
         setInterval(updateClock, 1000);
+
+        // Image Modal
+const imageModal = document.getElementById('imageModal');
+const modalImage = document.getElementById('modalImage');
+const closeModal = document.querySelector('.close-modal');
+
+document.querySelectorAll('.picture-container img').forEach(img => {
+    img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        imageModal.style.display = 'flex';
+    });
+});
+
+closeModal.addEventListener('click', () => {
+    imageModal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === imageModal) {
+        imageModal.style.display = 'none';
+    }
+});
+
+// Image modal functionality
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImage');
+const closeBtn = document.getElementsByClassName('close-modal')[0];
+
+// Add click event to all images
+document.querySelectorAll('.picture-container img').forEach(img => {
+    img.onclick = function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+    }
+});
+
+// Close modal when clicking X
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Close modal when clicking outside the image
+modal.onclick = function(e) {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === "block") {
+        modal.style.display = "none";
+    }
+});
     </script>
 </body>
 </html>
