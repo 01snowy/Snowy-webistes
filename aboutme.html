@@ -302,6 +302,79 @@
     animation-duration: 0.6s;
 }
 
+/* Contact Module Styles */
+.contact-module {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: row; /* Changed to row for better layout */
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: transform var(--animation-speed), border-color var(--animation-speed);
+    min-width: 200px;
+}
+
+.contact-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+}
+
+.contact-item i {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.contact-item a,
+.contact-item span {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color var(--animation-speed);
+}
+
+.contact-item a:hover {
+    color: var(--accent-color);
+}
+
+/* Update media queries for contact module */
+@media (max-width: 768px) {
+    .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .contact-item {
+        width: 100%;
+        min-width: unset;
+        padding: 0.75rem 1rem;
+    }
+    
+    .contact-item i {
+        font-size: 1.25rem;
+    }
+    
+    .contact-item a,
+    .contact-item span {
+        font-size: 0.9rem;
+    }
+}
+
 /* Media Queries */
         @media (max-width: 1024px) {
             .top-row {
@@ -416,6 +489,124 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Update these styles in your existing <style> section */
+
+        /* Make modules more compact on mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+                margin-top: 40px;
+                gap: 0.75rem;
+            }
+
+            .module {
+                padding: 1rem;
+            }
+
+            /* Fix profile section */
+            .profile {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 1rem;
+                min-height: auto;
+            }
+
+            .profile img {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto;
+            }
+
+            .profile-info {
+                width: 100%;
+            }
+
+            .profile-info h1 {
+                font-size: 1.5rem;
+            }
+
+            /* Fix pictures grid */
+            .pictures-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* Fix contact items */
+            .contact-info {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .contact-item {
+                width: 100%;
+                box-sizing: border-box;
+                justify-content: center;
+                padding: 0.75rem;
+            }
+
+            /* Fix tech stack */
+            .tech-stack {
+                gap: 1.5rem;
+            }
+
+            .tech-stack i {
+                font-size: 1.75rem;
+            }
+
+            /* Improve text readability */
+            .about-me p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin: 0.5rem 0;
+            }
+
+            /* Make clock more compact */
+            .analog-clock {
+                width: 100px;
+                height: 100px;
+            }
+
+            .clock-module {
+                padding: 1rem;
+            }
+        }
+
+        /* Additional fixes for very small screens */
+        @media (max-width: 480px) {
+            .profile-info h1 {
+                font-size: 1.25rem;
+            }
+
+            .discord-status {
+                font-size: 0.8rem;
+            }
+
+            .contact-item {
+                font-size: 0.9rem;
+            }
+
+            .module {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Fix modal on mobile */
+@media (max-width: 768px) {
+    .image-modal {
+        padding-top: 20px;
+    }
+
+    .close-modal {
+        right: 15px;
+        top: 15px;
+        font-size: 30px;
+    }
+
+    .modal-content {
+        max-width: 95%;
+    }
+}
     </style>
 </head>
 <body>
@@ -460,7 +651,7 @@
             <div class="module about-module">
                 <h2>About Me ♡</h2>
                 <div class="about-me">
-                    <p>Hey, Im a 19 y/o 1 trick pony web developer from the United States. i have 4 cat :3. I make all my websites from scratch with some help from ai :3. I use lanyard api for my discord rpc. I have a decent home lab...</p>     
+                    <p>Hey, Im a 19 y/o 1 trick pony web developer from the United States. i have 4 cat :3. I make all my websites from scratch with some help from ai :3. I use lanyard api for my discord rpc. I have a decent home lab... </p>     
                     <p>(～﹃～)~zZ.  </p>
                     <div class="tech-stack">
                         <i class="fa-regular fa-file-code" title="HTML5"></i>
@@ -493,10 +684,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="module contact-module">
+    <h2>Contact Me ♡</h2>
+    <div class="contact-info">
+        <div class="contact-item">
+            <i class="fa-regular fa-envelope"></i>
+            <a href="mailto:snowy@0lsnowy.xyz">snowy@0lsnowy.xyz</a>
+        </div>
+        <div class="contact-item">
+            <i class="fa-brands fa-discord"></i>
+            <span>@0lsnowy</span>
+        </div>
+    </div>
+</div>
+
         </div>
 
-
-    <!-- Image Modal -->
+        <!-- Image Modal -->
 <div class="image-modal" id="imageModal">
     <span class="close-modal">&times;</span>
     <img class="modal-content" id="modalImage">
