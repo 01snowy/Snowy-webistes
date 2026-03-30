@@ -3,226 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snowy0Web</title>
-    <meta content="Snowy0Web" property="og:title" />
-    <meta content="All my links and photos!" property="og:description" />
-    <meta content="https://0lsnowy.xyz" property="og:url" />
-    <meta content="https://0lsnowy.xyz/images/img1.jpg" property="og:image" />
-    <meta content="#221736" data-react-helmet="true" name="theme-color" />
+    <title>About Me</title>
     <script src="https://kit.fontawesome.com/9f2249c235.js" crossorigin="anonymous"></script>
     <style>
         :root {
-            --bg-color: #000000;
-            --card-bg: #161515;
             --text-primary: #ffffff;
             --text-secondary: #bbbbbb;
             --accent-color: #ffffff;
             --accent-hover: #a39090;
-            --border-color: #333333;
             --animation-speed: 0.3s;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/background/catlamp1.png') center/cover no-repeat fixed;
             color: var(--text-primary);
             font-family: 'Courier New', Courier, monospace;
-            line-height: 1.6;
-            padding: 0;
-            margin: 0;
             min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 2.5s;
+        /* Smooth section transitions */
+        .top-row,
+        .bottom-row,
+        .pictures-module {
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--accent-color);
-        }
-
-        h1 {
-            color: var(--text-primary);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .announcement {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform var(--animation-speed), box-shadow var(--animation-speed);
-        }
-
-        .announcement:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .announcement-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .announcement-title i {
-            margin-right: 8px;
-            color: var(--accent-color);
-        }
-
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .social-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-            transition: transform var(--animation-speed), box-shadow var(--animation-speed);
-            display: flex;
-            align-items: center;
-        }
-
-        .social-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            border-color: var(--accent-color);
-        }
-
-        .social-icon {
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-color);
-            margin-right: 15px;
-            border-radius: 50%;
-            background-color: rgba(105, 93, 117, 0.1);
-        }
-
-        .social-info {
-            flex: 1;
-        }
-
-        .social-name {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .social-link {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            word-break: break-all;
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color var(--animation-speed);
-        }
-
-        a:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
-        }
-
-        .terminal-module {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 30px;
-            border: 1px solid var(--border-color);
-        }
-
-        .prompt {
-            color: var(--text-secondary);
-        }
-
-        .command {
-            color: var(--text-primary);
-        }
-
-        .cat-ascii {
-            text-align: center;
-            margin: 30px 0;
-            color: var(--text-primary);
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-            animation-delay: 3s;
-        }
-
-        .loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--bg-color);
-            z-index: 100;
-            animation: fadeOut 0.5s ease-out forwards;
-            animation-delay: 2.3s;
-        }
-
-        .terminal-animation {
-            width: 80%;
-            max-width: 600px;
-        }
-
-        #animatedText {
-            color: var(--text-primary);
-            overflow: hidden;
-            white-space: pre-wrap;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .typed-cursor {
-            color: var(--text-primary);
-            animation: blink 0.7s infinite;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: auto;
-            padding: 20px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        @keyframes fadeIn {
+        @keyframes fadeInUp {
             from {
-                opacity: 0;
+                opacity: 0.8;
                 transform: translateY(20px);
             }
             to {
@@ -231,370 +49,958 @@
             }
         }
 
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .social-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Custom toggle for dark mode */
-        .theme-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-        }
-
-        .theme-switch button {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--animation-speed);
-        }
-
-        .theme-switch button:hover {
-            background-color: var(--accent-color);
-        }
-
-        /* Module specific styles */
-        .photodump-preview {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        .preview-img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 4px;
-            transition: transform var(--animation-speed);
-        }
-
-        .preview-img:hover {
-            transform: scale(1.1);
-        }
-
-        /* Discord status styling */
-        #discord-status {
+        .container {
+            width: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        .status-details {
+        /* Profile Section - Full Viewport */
+        .top-row {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            width: 100%;
+            position: relative;
+        }
+
+        .profile-module {
+            background: rgba(22, 21, 21, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 2rem 2.5rem;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .profile-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-shrink: 0;
+        }
+
+        .profile-right {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            object-fit: cover;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex: 1;
+            text-align: left;
+        }
+
+        .name-with-icon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0;
+        }
+
+        .profile-info h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            white-space: normal;
+        }
+
+        .name-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .pronouns {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-links-container {
+            display: flex;
+            gap: 0.75rem;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .discord-status {
             display: flex;
             align-items: center;
-            margin-top: 5px;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: rgba(114, 137, 218, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(114, 137, 218, 0.4);
+            flex: 1;
+            min-width: 200px;
+            box-sizing: border-box;
+        }
+
+        .quick-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: rgba(160, 132, 132, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(160, 132, 132, 0.4);
+            flex: 1;
+            min-width: 200px;
+            box-sizing: border-box;
+            justify-content: center;
+        }
+
+        .quick-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+            margin: 0 0.5rem;
+        }
+
+        .quick-links a:hover {
+            color: var(--accent-hover);
+        }
+
+        .quick-links i {
+            color: var(--text-primary);
+            font-size: 0.9rem;
         }
 
         .status-icon {
-            margin-right: 10px;
-            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        .status-text {
+        #discord-status-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            word-wrap: break-word;
             flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tech-stack i {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            transition: transform var(--animation-speed), color var(--animation-speed);
+        }
+
+        .tech-stack i:hover {
+            transform: scale(1.2);
+            color: var(--accent-hover);
+        }
+
+        .fa-file-code:hover { color: #9d5874; }
+        .fa-css:hover { color: #4d6d8a; }
+        .fa-python:hover { color: #8e4d2a; }
+
+        .links-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(160, 132, 132, 0.3);
+            border: 1px solid rgba(160, 132, 132, 0.6);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .links-button:hover {
+            background: rgba(160, 132, 132, 0.5);
+            border-color: rgba(160, 132, 132, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(160, 132, 132, 0.3);
+        }
+
+        .scroll-hint {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            display: block;
+            opacity: 1;
+            pointer-events: all;
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .scroll-hint:hover {
+            transform: translateX(-50%) translateY(-3px);
+            color: var(--accent-color);
+        }
+
+        /* Bio and Contact Section */
+        .bottom-row {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 4rem 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom-row .module {
+            background: rgba(22, 21, 21, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .about-module,
+        .contact-module {
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            margin-top: 0;
+        }
+
+        .about-me p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            color: var(--text-primary);
+        }
+
+        .about-me .tech-stack {
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: rgba(22, 21, 21, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: transform var(--animation-speed), border-color var(--animation-speed), background var(--animation-speed);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(22, 21, 21, 0.8);
+        }
+        .timezone-info {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(22, 21, 21, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .timezone-info .label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .timezone-info .value {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-item a,
+        .contact-item span {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color var(--animation-speed);
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Pictures Section */
+        .pictures-module {
+            min-height: 100vh;
+            padding: 4rem 1rem !important;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .pictures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .picture-container {
+            position: relative;
+            width: 100%;
+            padding-top: 66.67%;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: transform var(--animation-speed);
+            background: rgba(22, 21, 21, 0.5);
+        }
+
+        .picture-container:hover {
+            transform: scale(1.02);
+        }
+
+        .picture-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            animation: zoom 0.6s;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            color: var(--text-primary);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            transition: transform 0.2s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes zoom {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .top-row {
+                min-height: 100vh;
+                padding: 1.5rem 0.75rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+
+            .profile-module {
+                padding: 1.5rem;
+                width: 100%;
+            }
+
+            .profile {
+                flex-direction: column;
+                gap: 1.5rem;
+                width: 100%;
+                align-items: center;
+            }
+
+            .profile-left {
+                width: 100%;
+                align-items: center;
+            }
+
+            .profile-right {
+                width: 100%;
+                align-items: center;
+            }
+
+            .profile img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-info {
+                text-align: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            .profile-info h1 {
+                font-size: 1.8rem;
+            }
+
+            .pronouns {
+                font-size: 0.85rem;
+            }
+
+            .status-links-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .discord-status {
+                min-width: 100%;
+            }
+
+            .quick-links {
+                min-width: 100%;
+                gap: 0.75rem;
+            }
+
+            .tech-stack {
+                justify-content: center;
+            }
+
+            .scroll-hint {
+                text-align: center;
+            }
+
+            .bottom-row {
+                min-height: auto;
+                padding: 2rem 0.75rem;
+                gap: 2rem;
+                scroll-margin-top: 0;
+            }
+
+            .bottom-row .module {
+                padding: 1.5rem;
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .about-me p {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            .about-me .tech-stack {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .pictures-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .pictures-module {
+                min-height: auto;
+                padding: 2rem 0.75rem !important;
+                width: 100%;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .contact-item {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem;
+            }
+
+            /* Improve touch targets on mobile */
+            .scroll-hint {
+                padding: 1rem 0;
+                font-size: 0.9rem;
+            }
+
+            .picture-container {
+                padding-top: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-row {
+                min-height: 100vh;
+                padding: 1rem 0.5rem;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+            }
+
+            .profile-module {
+                padding: 1rem;
+            }
+
+            .profile {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-left {
+                width: 100%;
+                align-items: center;
+            }
+
+            .profile-right {
+                width: 100%;
+                align-items: center;
+            }
+
+            .profile img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-info h1 {
+                font-size: 1.4rem;
+                line-height: 1.2;
+            }
+
+            .discord-status {
+                font-size: 0.8rem;
+                padding: 0.5rem;
+                width: 100%;
+            }
+
+            .tech-stack {
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .tech-stack i {
+                font-size: 1.5rem;
+            }
+
+            .scroll-hint {
+                font-size: 0.8rem;
+            }
+
+            .bottom-row {
+                padding: 1.5rem 0.5rem;
+                gap: 1.5rem;
+            }
+
+            .bottom-row .module {
+                padding: 1rem;
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .about-me p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin: 0.75rem 0;
+            }
+
+            .pictures-module {
+                padding: 1.5rem 0.5rem !important;
+                min-height: auto;
+            }
+
+            .pictures-grid {
+                gap: 0.75rem;
+                width: 100%;
+            }
+
+            .contact-item {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .contact-item i {
+                font-size: 1.25rem;
+            }
+
+            .close-modal {
+                right: 15px;
+                top: 10px;
+                font-size: 30px;
+            }
+
+            .modal-content {
+                max-width: 95%;
+            }
+
+            /* Better mobile scroll spacing */
+            .picture-container {
+                padding-top: 100%;
+                border-radius: 8px;
+            }
+        }
+
+        /* Landscape adjustments */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .top-row {
+                min-height: auto;
+                padding: 1rem 0.5rem;
+            }
+
+            .profile-module {
+                padding: 1rem;
+            }
+
+            .bottom-row {
+                min-height: auto;
+                padding: 1.5rem 0.5rem;
+            }
+
+            .pictures-module {
+                min-height: auto;
+                padding: 1.5rem 0.5rem !important;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .profile-info h1 {
+                font-size: 1.5rem;
+            }
+
+            .about-me p {
+                font-size: 0.85rem;
+                margin: 0.5rem 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Opening Animation -->
-    <div class="loader-container">
-        <div class="terminal-animation">
-            <div id="animatedText"></div>
-            <pre class="cat-ascii">
-    |\__/,|   (`\
-  _.|o o  |_   ) )
-  -(((---(((--------
-            </pre>
-        </div>
-    </div>
-
-    <!-- Main Content -->
     <div class="container">
-        <header>
-            <h1>Snowy0Web</h1>
-            <p>All my links ♡</p>
-        </header>
-
-        <!-- Announcement Module -->
-        <div class="announcement">
-            <div class="announcement-title">
-                <i class="fa-solid fa-bell"></i>
-                ANNOUNCEMENT
+        <!-- Profile Section -->
+        <div class="top-row">
+            <div class="profile-module">
+                <div class="profile">
+                    <div class="profile-left">
+                        <img src="/images/pfp.jpg" alt="Profile Picture">
+                    </div>
+                    <div class="profile-right">
+                        <div class="name-with-icon">
+                            <i class="fa-regular fa-file-code name-icon"></i>
+                            <h1>0 l _ s n o w y</h1>
+                        </div>
+                        <div class="pronouns">Pronouns: He/Him</div>
+                        <div class="status-links-container">
+                            <div class="discord-status">
+                                <div class="status-icon">
+                                    <i class="fa-brands fa-discord"></i>
+                                </div>
+                                <div id="discord-status-text">Loading status...</div>
+                            </div>
+                            <div class="quick-links">
+                                <a href="links.html" title="All my links"><i class="fa-solid fa-link"></i> Links</a>
+                                <a href="https://github.com/01snowy" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://x.com/0lsnowy" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="https://open.spotify.com/user/i35t0sjd1qyrul7d8o9zcx8vm?si=073d1ef11af7494f" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+                            </div>
+                        </div>
+                        <div class="tech-stack">
+                            <i class="fa-regular fa-file-code" title="HTML5"></i>
+                            <i class="fa-brands fa-css" title="CSS3"></i>
+                            <i class="fa-brands fa-python" title="Python"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="announcement-content">Added a About me site. :3 ♡</div>
+            <a href="#bio" class="scroll-hint">↓ Scroll for my bio and links ↓</a>
         </div>
-       
-        <!-- Discord Status Module -->
-        <div id="discord-status" class="announcement">
-            <div class="announcement-title">
-                <i class="fa-brands fa-discord"></i>
-                DISCORD STATUS
-            </div>
-            <div class="status-details">
-                <div class="status-icon"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
-                <div class="status-text announcement-content">Loading...</div>
-            </div>
-        </div>
 
-        <!-- Social Links Module -->
-        <div class="terminal-module">
-            <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">cat social_links.txt</span></p>
-        </div>
-        
-        <div class="social-grid">
-            <!-- Photodump Link with preview -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">About Me</div>
-                    <a href="/aboutme" class="social-link">Read here♡</a>
-                </div>
-            </div>
-            
-             <!-- Music Recs -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-solid fa-music"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">Music</div>
-                    <a href="/music" class="social-link">Here</a>
-                </div>
-            </div>
-
-            <!-- Discord -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-brands fa-discord"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">Discord</div>
-                    <div class="social-link">0lsnowy</div>
-                </div>
-            </div>
-            
-            <!-- GitHub -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-brands fa-github"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">GitHub</div>
-                    <a href="https://github.com/01snowy" class="social-link">01snowy</a>
-                </div>
-            </div>
-            
-            <!-- GitHub -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-solid fa-blog"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">My Blog</div>
-                    <a href="/blog" class="social-link">Here</a>
-                </div>
-            </div>
-            
-            <!-- VRChat -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-solid fa-desktop"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">VRChat</div>
-                    <a href="https://vrchat.com/home/user/usr_0eec76b6-9802-4c46-8391-4243f2327b09" class="social-link">@S N O W Y _ 0 X</a>
-                </div>
-            </div>
-            
-            <!-- Spotify -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-brands fa-spotify"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">Spotify</div>
-                    <a href="https://open.spotify.com/user/i35t0sjd1qyrul7d8o9zcx8vm?si=073d1ef11af7494f" class="social-link">Listen</a>
-                </div>
-            </div>
-            
-            <!-- Twitter -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">Twitter</div>
-                    <a href="https://x.com/0lsnowy" class="social-link">@0lsnowy</a>
-                </div>
-            </div>
-            
-            <!-- Stats.fm -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">Stats.fm</div>
-                    <a href="https://stats.fm/12ong" class="social-link">stats.fm/12ong</a>
+        <!-- Bio and Contact Section -->
+        <div class="bottom-row" id="bio">
+            <div class="module about-module">
+                <h2>About Me ♡</h2>
+                <div class="about-me">
+                    <p>hey! i'm a 19 y/o web dev from the US who specializes in self built services. i've got 4 cats (they lowk the real dev's), MY EVIL: (i build everything with a little ai :(. i made the discord rpc thing with lanyard pub api, sorry😔.), my homelab is cool ig i have a gpu in it for unity :3, I like making things as simple as possible with what I have, and im mostly a one-trick pony web developer, but it's cool ig. :3</p>     
+                    <p>(～﹃～)~zZ</p>
+                    <div class="tech-stack">
+                        <i class="fa-regular fa-file-code" title="HTML5"></i>
+                        <i class="fa-brands fa-css" title="CSS3"></i>
+                        <i class="fa-brands fa-python" title="Python"></i>
+                    </div>
                 </div>
             </div>
 
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-solid fa-desktop"></i>
-                </div>
-                <div class="social-info">
-                    <div class="social-name">Pc and VR Specs</div>
-                    <a href="/specs" class="social-link">Specs</a>
+            <div class="module contact-module">
+                <h2>Contact Me ♡</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fa-regular fa-envelope"></i>
+                        <a href="mailto:snowy@0lsnowy.xyz">snowy@0lsnowy.xyz</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-brands fa-discord"></i>
+                        <span>@0lsnowy</span>
+                    </div>
+                </div>                <a href="links.html" class="links-button">✦ My Links ✦</a>                <div class="timezone-info">
+                    <div class="label">Timezone & Time /ᐠ｡ꞈ｡ᐟ\</div>
+                    <div class="value" id="timezone-display">EST • Ummm broken js ig...</div>
                 </div>
             </div>
-            
+        </div>
 
-            <!-- BlueSky -->
-            <div class="social-card">
-                <div class="social-icon">
-                    <i class="fa-brands fa-bluesky"></i>
+        <!-- Pictures Section -->
+        <div class="pictures-module">
+            <h2>Pictures ♡</h2>
+            <div class="pictures-grid">
+                <div class="picture-container">
+                    <img src="/images/aboutme/img4L.jpg" alt="Portrait image">
                 </div>
-                <div class="social-info">
-                    <div class="social-name">Bluesky</div>
-                    <a href="https://bsky.app/profile/snowy0l.bsky.social" class="social-link">snowy0l.bsky.social</a>
+                <div class="picture-container">
+                    <img src="/images/aboutme/img1L.png" alt="cat">
+                </div>
+                <div class="picture-container">
+                    <img src="/images/aboutme/img2L.png" alt="cat">
+                </div>
+                <div class="picture-container">
+                    <img src="/images/aboutme/img3L.jpg" alt="Landscape image">
+                </div>
+                <div class="picture-container">
+                    <img src="/images/aboutme/img5L.gif" alt="Landscape image">
+                </div>
+                <div class="picture-container">
+                    <img src="/images/aboutme/img6L.jpg" alt="Landscape image">
                 </div>
             </div>
         </div>
-        
-        <!-- Terminal Echo Module -->
-        <div class="terminal-module">
-            <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">echo "I ♡ yuri!"</span></p>
-            <p>I ♡ yuri!</p>
-            <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">_</span></p>
-        </div>
-        
-        <!-- Cat ASCII Art -->
-        <div class="cat-ascii">
-            <pre>
-    |\__/,|   (`\
-  _.|o o  |_   ) )
-  -(((---(((--------
-            </pre>
-        </div>
-        
-        <footer>
-            2025 Snowy0Web - Made with love by 0lsnowy♡
-        </footer>
     </div>
-   <script>
-    const text = "01snowy@social-links:~$ loading social profile...\n01snowy@social-links:~$ initializing...\n01snowy@social-links:~$ welcome!";
-    const animatedText = document.getElementById('animatedText');
-    let index = 0;
 
-    function typeWriter() {
-        if (index < text.length) {
-            animatedText.innerHTML += text.charAt(index);
-            index++;
-            const randomSpeed = Math.floor(Math.random() * 70) + 30;
-            setTimeout(typeWriter, randomSpeed);
-        } else {
-            animatedText.innerHTML += '<span class="typed-cursor">|</span>';
-        }
-    }
-    window.onload = typeWriter;
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <img class="modal-content" id="modalImage">
+    </div>
 
-    async function fetchDiscordRPC() {
-        const userId = "850894487755554816";
-        try {
-            const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-            const data = await response.json();
+    <script>
+        // Discord Status
+        async function fetchDiscordRPC() {
+            const userId = "850894487755554816";
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                const data = await response.json();
+                const statusElement = document.getElementById('discord-status-text');
 
-            const statusElement = document.querySelector("#discord-status .status-text");
-            const iconElement = document.querySelector("#discord-status .status-icon");
+                if (data.success) {
+                    const discordData = data.data;
+                    let statusText = "Currently idle.";
 
-            if (!data.success) {
-                statusElement.innerText = "Failed to load Discord status.";
-                return;
-            }
-
-            const discordData = data.data;
-            let statusText = "Currently idle.";
-            let iconClass = "fa-solid fa-moon";
-            let iconColor = "#ffc107";
-
-            const status = discordData.discord_status;
-            if (status === "offline") {
-                statusText = "Currently offline.";
-                iconClass = "fa-solid fa-circle";
-                iconColor = "#6c757d";
-            } else if (status === "online" || status === "idle") {
-                statusText = "Online";
-                iconClass = "fa-solid fa-circle";
-                iconColor = "#28a745";
-            } else if (status === "dnd") {
-                statusText = "Do not disturb.";
-                iconClass = "fa-solid fa-minus-circle";
-                iconColor = "#dc3545";
-            }
-
-            // Spotify presence
-            if (discordData.listening_to_spotify && discordData.spotify) {
-                const track = discordData.spotify;
-                statusText = `♬⋆.˚Listening to ${track.song} by ${track.artist}`;
-            } else if (discordData.activities && discordData.activities.length > 0) {
-                const activity = discordData.activities.find(act => act.name !== "Custom Status");
-                if (activity && activity.name) {
-                    statusText += ` — Playing ${activity.name}`;
-                    if (activity.details) {
-                        statusText += `: ${activity.details}`;
+                    if (discordData.listening_to_spotify && discordData.spotify) {
+                        statusText = `♬⋆.˚Listening to ${discordData.spotify.song} by ${discordData.spotify.artist}`;
+                    } else if (discordData.activities && discordData.activities.length > 0) {
+                        const activity = discordData.activities.find(act => act.name !== "Custom Status");
+                        if (activity) {
+                            statusText = `Playing ${activity.name}`;
+                        }
                     }
+
+                    statusElement.innerText = statusText;
                 }
+            } catch (error) {
+                console.error("Failed to fetch Discord status:", error);
             }
-
-            statusElement.innerText = statusText;
-            iconElement.innerHTML = `<i class="${iconClass}" style="color: ${iconColor};"></i>`;
-
-        } catch (error) {
-            console.error("Failed to fetch Discord RPC:", error);
-            document.querySelector("#discord-status .status-text").innerText = "Error loading Discord status.";
         }
-    }
 
-    fetchDiscordRPC();
-    setInterval(fetchDiscordRPC, 15000); // Refresh every 15s
-</script>
+        fetchDiscordRPC();
+        setInterval(fetchDiscordRPC, 15000);
+
+        // Update timezone and current time
+        function updateTimezone() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true,
+                timeZone: 'America/New_York'
+            });
+            const tzDisplay = document.getElementById('timezone-display');
+            tzDisplay.innerText = `EST • ${timeStr}`;
+        }
+
+        updateTimezone();
+        setInterval(updateTimezone, 1000);
+
+        // Image Modal
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+
+        document.querySelectorAll('.picture-container img').forEach(img => {
+            img.addEventListener('click', () => {
+                modalImage.src = img.src;
+                imageModal.classList.add('show');
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            imageModal.classList.remove('show');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === imageModal) {
+                imageModal.classList.remove('show');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && imageModal.classList.contains('show')) {
+                imageModal.classList.remove('show');
+            }
+        });
+
+        // Smooth scroll hint
+        document.querySelector('.scroll-hint').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('bio').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Fade scroll hint on scroll
+        const scrollHint = document.querySelector('.scroll-hint');
+        const topRow = document.querySelector('.top-row');
+        
+        window.addEventListener('scroll', () => {
+            const topRowBottom = topRow.offsetHeight;
+            const scrollProgress = window.scrollY / topRowBottom;
+            const opacity = Math.max(0, 1 - scrollProgress);
+            scrollHint.style.opacity = opacity;
+            scrollHint.style.pointerEvents = opacity < 0.2 ? 'none' : 'auto';
+        });
+
+        // Intersection Observer for smooth section animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for smooth scroll animations
+        document.querySelectorAll('.top-row, .bottom-row, .pictures-module').forEach(section => {
+            section.style.opacity = '0.95';
+            section.style.transform = 'translateY(0)';
+            section.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            sectionObserver.observe(section);
+        });
+
+        // Prevent scroll jumping on hash navigation
+        window.addEventListener('hashchange', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, false);
+    </script>
 </body>
 </html>

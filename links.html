@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music</title>
-    <meta content="Music" property="og:title" />
-    <meta content="All my favorite songs!" property="og:description" />
+    <title>Snowy0Web</title>
+    <meta content="Snowy0Web" property="og:title" />
+    <meta content="All my links and photos!" property="og:description" />
     <meta content="https://0lsnowy.xyz" property="og:url" />
-    <meta content="https://0lsnowy.xyz/images/img4.jpg" property="og:image" />
+    <meta content="https://0lsnowy.xyz/images/img1.jpg" property="og:image" />
     <meta content="#221736" data-react-helmet="true" name="theme-color" />
     <script src="https://kit.fontawesome.com/9f2249c235.js" crossorigin="anonymous"></script>
     <style>
@@ -328,25 +328,6 @@
         .status-text {
             flex: 1;
         }
-
-        /* Genre filter button styles */
-        .genre-btn {
-            background: var(--card-bg);
-            color: var(--accent-color);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 7px 18px;
-            margin: 5px 7px 5px 0;
-            font-family: inherit;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background var(--animation-speed), color var(--animation-speed), border-color var(--animation-speed);
-        }
-        .genre-btn:hover, .genre-btn.active {
-            background: var(--accent-color);
-            color: var(--bg-color);
-            border-color: var(--accent-color);
-        }
     </style>
 </head>
 <body>
@@ -365,84 +346,168 @@
     <!-- Main Content -->
     <div class="container">
         <header>
-            <h1>Music Recommendations</h1>
-            <p>All my playlists ᓚᘏᗢ</p>
-            <a href="links.html" class="back-button">&larr; Back to Links</a>
+            <h1>Snowy0Web</h1>
+            <p>All my links ♡</p>
         </header>
-    <!-- Spotify Recommendations Module -->
-<div class="terminal-module" id="spotify-module">
-  <p><span class="prompt">01snowy@spotify-recs:~$</span> <span class="command">cat spotify_recommendations.json</span></p>
 
-  <!-- Song of the Month Section -->
-<div class="terminal-module" id="song-of-the-month" style="margin-bottom: 30px;">
-  <h2 style="color: var(--accent-color);">⋆｡˚☽ Song of the Month</h2>
-  <div class="social-card">
-    <div class="social-icon" style="background-image: url('https://i.scdn.co/image/ab67616d0000b273b2e99fb5c865e6c6464bf6ac'); background-size: cover; background-position: center;"></div>
-    <div class="social-info">
-      <div class="social-name">Asheville</div>
-      <div class="social-link">glaive — <em>Hyperpop</em></div>
-      <a href="https://open.spotify.com/album/2H4P4WK9JJKAe7pRtW1sIa?si=APFGDX9LSoaMG8jGFXTvQg" target="_blank">Listen</a>
-    </div>
-  </div>
-</div>
-<!-- End Song of the Month Section -->
-
-  <h2 style="margin-top: 20px; color: var(--accent-color);">⋆｡˚☽ Playlists</h2>
-  <div id="playlist-list" class="social-grid" style="margin-bottom: 30px;"></div>
-
-  <h2 style="margin-top: 20px; color: var(--accent-color);">⋆｡˚☽ Songs by Genre</h2>
-  <div id="genre-filters" style="margin: 10px 0;"></div>
-  <div id="spotify-list" class="social-grid"></div>
-</div>
-<script src="spotify_data.js"></script>
-<script>
-  const filtersContainer = document.getElementById("genre-filters");
-  const songsContainer = document.getElementById("spotify-list");
-  const playlistsContainer = document.getElementById("playlist-list");
-
-  const genres = [...new Set(spotifySongs.map(song => song.genre))];
-
-  function renderFilters() {
-    filtersContainer.innerHTML = `<button class="genre-btn" onclick="filterSongs('All')">All</button>` +
-      genres.map(g => `<button class="genre-btn" onclick="filterSongs('${g}')">${g}</button>`).join('');
-  }
-
-  function filterSongs(genre) {
-    const filtered = genre === 'All' ? spotifySongs : spotifySongs.filter(s => s.genre === genre);
-    renderSongs(filtered);
-  }
-
-  function renderSongs(songs) {
-    songsContainer.innerHTML = songs.map(song => `
-      <div class="social-card">
-        <div class="social-icon" style="background-image: url('${song.cover}'); background-size: cover; background-position: center;"></div>
-        <div class="social-info">
-          <div class="social-name">${song.title}</div>
-          <div class="social-link">${song.artist} — <em>${song.genre}</em></div>
-          <a href="${song.link}" target="_blank">Listen</a>
+        <!-- Announcement Module -->
+        <div class="announcement">
+            <div class="announcement-title">
+                <i class="fa-solid fa-bell"></i>
+                ANNOUNCEMENT
+            </div>
+            <div class="announcement-content">Added a About me site. :3 ♡</div>
         </div>
-      </div>
-    `).join('');
-  }
-
-  function renderPlaylists() {
-    playlistsContainer.innerHTML = spotifyPlaylists.map(playlist => `
-      <div class="social-card">
-        <div class="social-icon" style="background-image: url('${playlist.cover}'); background-size: cover; background-position: center;"></div>
-        <div class="social-info">
-          <div class="social-name">${playlist.title}</div>
-          <div class="social-link">${playlist.description}</div>
-          <a href="${playlist.link}" target="_blank">Open Playlist</a>
+       
+        <!-- Discord Status Module -->
+        <div id="discord-status" class="announcement">
+            <div class="announcement-title">
+                <i class="fa-brands fa-discord"></i>
+                DISCORD STATUS
+            </div>
+            <div class="status-details">
+                <div class="status-icon"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+                <div class="status-text announcement-content">Loading...</div>
+            </div>
         </div>
-      </div>
-    `).join('');
-  }
 
-  renderFilters();
-  renderSongs(spotifySongs);
-  renderPlaylists();
-</script>
-<div class="cat-ascii">
+        <!-- Social Links Module -->
+        <div class="terminal-module">
+            <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">cat social_links.txt</span></p>
+        </div>
+        
+        <div class="social-grid">
+            <!-- Photodump Link with preview -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">About Me</div>
+                    <a href="/aboutme" class="social-link">Read here♡</a>
+                </div>
+            </div>
+            
+             <!-- Music Recs -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-solid fa-music"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">Music</div>
+                    <a href="/music" class="social-link">Here</a>
+                </div>
+            </div>
+
+            <!-- Discord -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-brands fa-discord"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">Discord</div>
+                    <div class="social-link">0lsnowy</div>
+                </div>
+            </div>
+            
+            <!-- GitHub -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">GitHub</div>
+                    <a href="https://github.com/01snowy" class="social-link">01snowy</a>
+                </div>
+            </div>
+            
+            <!-- GitHub -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-solid fa-blog"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">My Blog</div>
+                    <a href="/blog" class="social-link">Here</a>
+                </div>
+            </div>
+            
+            <!-- VRChat -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-solid fa-desktop"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">VRChat</div>
+                    <a href="https://vrchat.com/home/user/usr_0eec76b6-9802-4c46-8391-4243f2327b09" class="social-link">@S N O W Y _ 0 X</a>
+                </div>
+            </div>
+            
+            <!-- Spotify -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-brands fa-spotify"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">Spotify</div>
+                    <a href="https://open.spotify.com/user/i35t0sjd1qyrul7d8o9zcx8vm?si=073d1ef11af7494f" class="social-link">Listen</a>
+                </div>
+            </div>
+            
+            <!-- Twitter -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">Twitter</div>
+                    <a href="https://x.com/0lsnowy" class="social-link">@0lsnowy</a>
+                </div>
+            </div>
+            
+            <!-- Stats.fm -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">Stats.fm</div>
+                    <a href="https://stats.fm/12ong" class="social-link">stats.fm/12ong</a>
+                </div>
+            </div>
+
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-solid fa-desktop"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">Pc and VR Specs</div>
+                    <a href="/specs" class="social-link">Specs</a>
+                </div>
+            </div>
+            
+
+            <!-- BlueSky -->
+            <div class="social-card">
+                <div class="social-icon">
+                    <i class="fa-brands fa-bluesky"></i>
+                </div>
+                <div class="social-info">
+                    <div class="social-name">Bluesky</div>
+                    <a href="https://bsky.app/profile/snowy0l.bsky.social" class="social-link">snowy0l.bsky.social</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Terminal Echo Module -->
+        <div class="terminal-module">
+            <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">echo "I ♡ yuri!"</span></p>
+            <p>I ♡ yuri!</p>
+            <p><span class="prompt">01snowy@social-links:~$</span> <span class="command">_</span></p>
+        </div>
+        
+        <!-- Cat ASCII Art -->
+        <div class="cat-ascii">
             <pre>
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -455,7 +520,7 @@
         </footer>
     </div>
    <script>
-    const text = "01snowy@Music:~$ loading Music recs...\n01snowy@Music:~$ initializing...\n01snowy@social-links:~$ welcome!";
+    const text = "01snowy@social-links:~$ loading social profile...\n01snowy@social-links:~$ initializing...\n01snowy@social-links:~$ welcome!";
     const animatedText = document.getElementById('animatedText');
     let index = 0;
 

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Snowy</title>
+    <script src="https://kit.fontawesome.com/9f2249c235.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --card-bg: #161515;
+            --text-primary: #ffffff;
+            --text-secondary: #bbbbbb;
+            --accent-color: #ffffff;
+            --accent-hover: #a39090;
+            --border-color: #333333;
+            --animation-speed: 0.3s;
+        }
+
+        body {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/background/catlamp1.png') center/cover no-repeat fixed;
+            color: var(--text-primary);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .module {
+            background: rgba(22, 21, 21, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .about-me p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            color: var(--text-primary);
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack i {
+            font-size: 2rem;
+            color: var(--text-primary);
+            transition: transform var(--animation-speed), color var(--animation-speed);
+        }
+
+        .tech-stack i:hover {
+            transform: scale(1.2);
+            color: var(--accent-hover);
+        }
+
+        .fa-file-code:hover {
+            color: #9d5874;
+        }
+
+        .fa-css:hover {
+            color: #4d6d8a;
+        }
+
+        .fa-python:hover {
+            color: #8e4d2a;
+        }
+
+        .contact-module {
+            text-align: center;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: rgba(22, 21, 21, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: transform var(--animation-speed), border-color var(--animation-speed), background var(--animation-speed);
+            min-width: 200px;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(22, 21, 21, 0.8);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .contact-item a,
+        .contact-item span {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color var(--animation-speed);
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            transition: transform var(--animation-speed);
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+                margin: 1rem auto;
+                gap: 1rem;
+            }
+
+            .module {
+                padding: 1rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .about-me p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin: 0.5rem 0;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-item {
+                width: 100%;
+                box-sizing: border-box;
+                justify-content: center;
+                padding: 0.75rem;
+                min-width: unset;
+            }
+
+            .tech-stack {
+                gap: 1.5rem;
+            }
+
+            .tech-stack i {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.1rem;
+            }
+
+            .module {
+                padding: 0.75rem;
+            }
+
+            .contact-item {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/aboutme.html" class="back-link">← Back</a>
+
+        <div class="module">
+            <h2>About Me ♡</h2>
+            <div class="about-me">
+                <p>hey! i'm a 19 y/o web dev from the US who specializes in hand-crafted websites. i've got 4 cats (they're the real developers honestly), and i build everything from scratch with a sprinkle of ai assistance. i love working with discord api via lanyard, tinkering in my homelab, and making things that actually look good. mostly a one-trick pony web developer, but i'm passionate about what i do :3</p>     
+                <p>(～﹃～)~zZ</p>
+                <div class="tech-stack">
+                    <i class="fa-regular fa-file-code" title="HTML5"></i>
+                    <i class="fa-brands fa-css" title="CSS3"></i>
+                    <i class="fa-brands fa-python" title="Python"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="module contact-module">
+            <h2>Contact Me ♡</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <a href="mailto:snowy@0lsnowy.xyz">snowy@0lsnowy.xyz</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-discord"></i>
+                    <span>@0lsnowy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
