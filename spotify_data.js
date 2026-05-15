@@ -2393,3 +2393,10 @@ const spotifyPlaylists = [
     "cover": "https://mosaic.scdn.co/640/ab67616d00001e0234e18166ca018d3f111d3e6aab67616d00001e026b0284ac227fedad7f7979eaab67616d00001e02ab0d83b752dcf9f2a7ddd51bab67616d00001e02ecfa7c3f8214f6f4569f212a"
   }
 ];
+
+const spotifyAlbumOfTheMonth = {
+  "title": "K1",
+  "artist": "kmoe",
+  "link": "https://open.spotify.com/album/6f7CThvZW0bwczICdR0yHV?si=UH5Ch-liS5CDL8wgL3CJwA",
+  "cover": "https://i.scdn.co/image/ab67616d0000b27334e18166ca018d3f111d3e6a"
+};
