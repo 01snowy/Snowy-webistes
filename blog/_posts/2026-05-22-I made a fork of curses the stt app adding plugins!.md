@@ -1,2 +1,2 @@
 # I made a fork of curses the stt app adding plugins!
-[![Preview](\images\image.png "Preview")](https://github.com/01snowy/curses-plugged-in)
+<img src="images\image.png" width="380" height="240">
