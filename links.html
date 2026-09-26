@@ -49,7 +49,7 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 2.5s;
+            animation-delay: 2.2s;
         }
 
         header {
@@ -177,7 +177,7 @@
             color: var(--text-primary);
             opacity: 0;
             animation: fadeIn 0.8s ease-out forwards;
-            animation-delay: 3s;
+            animation-delay: 2.2s;
         }
 
         .loader-container {
@@ -192,7 +192,9 @@
             background-color: var(--bg-color);
             z-index: 100;
             animation: fadeOut 0.5s ease-out forwards;
-            animation-delay: 2.3s;
+            animation-delay: 2.1s;
+            animation-fill-mode: forwards;
+            pointer-events: none;
         }
 
         .terminal-animation {
@@ -575,16 +577,16 @@
         </footer>
     </div>
    <script>
-    const text = "01snowy@social-links:~$ loading social profile...\n01snowy@social-links:~$ initializing...\n01snowy@social-links:~$ welcome!";
+    const text = "01snowy@social-links:~$ loading social profile...";
     const animatedText = document.getElementById('animatedText');
+    const typingSpeed = 35;
     let index = 0;
 
     function typeWriter() {
         if (index < text.length) {
             animatedText.innerHTML += text.charAt(index);
             index++;
-            const randomSpeed = Math.floor(Math.random() * 70) + 30;
-            setTimeout(typeWriter, randomSpeed);
+            setTimeout(typeWriter, typingSpeed);
         } else {
             animatedText.innerHTML += '<span class="typed-cursor">|</span>';
         }
