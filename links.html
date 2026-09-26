@@ -329,8 +329,63 @@
             flex: 1;
         }
     </style>
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <style>
+        body.site-shell .container {
+            width: min(100%, 800px);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 18px 40px;
+            opacity: 1;
+            transform: none;
+            animation: none;
+        }
+
+        body.site-shell header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+
+        body.site-shell h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        body.site-shell .announcement {
+            margin-bottom: 18px;
+        }
+
+        body.site-shell .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        body.site-shell .social-card {
+            min-height: 88px;
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+        }
+
+        body.site-shell .social-icon {
+            width: 42px;
+            height: 42px;
+            font-size: 1.2rem;
+            margin-right: 14px;
+        }
+
+        @media (max-width: 700px) {
+            body.site-shell .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="site-shell">
     <!-- Opening Animation -->
     <div class="loader-container">
         <div class="terminal-animation">

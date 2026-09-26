@@ -418,8 +418,168 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <style>
+        body.site-shell .container {
+            width: min(100%, 900px);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 18px 42px;
+        }
+
+        body.site-shell .top-row {
+            min-height: 52vh;
+            padding: 2.5rem 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.site-shell .profile-module {
+            max-width: 760px;
+            width: 100%;
+            padding: 2rem 2.25rem;
+            background: rgba(22, 21, 21, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        body.site-shell .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        body.site-shell .profile-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: center;
+        }
+
+        body.site-shell .profile-info h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        body.site-shell .profile-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        body.site-shell .back-link {
+            display: inline-block;
+            margin-bottom: 0;
+            color: var(--site-text);
+        }
+
+        body.site-shell .bottom-row {
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            padding: 1.5rem 1rem 4rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.site-shell .bottom-row .module {
+            background: rgba(22, 21, 21, 0.72);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        body.site-shell .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            width: 100%;
+        }
+
+        body.site-shell .social-card {
+            background: rgba(22, 21, 21, 0.55);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            min-height: 88px;
+        }
+
+        body.site-shell .social-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255,255,255,0.18);
+        }
+
+        body.site-shell .genre-filters {
+            margin-bottom: 1.5rem;
+        }
+
+        body.site-shell .genre-btn {
+            background: rgba(22, 21, 21, 0.5);
+            color: var(--site-accent);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 7px 18px;
+        }
+
+        body.site-shell .genre-btn:hover {
+            background: rgba(160, 132, 132, 0.3);
+            border-color: rgba(255,255,255,0.35);
+        }
+
+        body.site-shell .genre-btn.active {
+            background: var(--site-accent);
+            color: #000;
+            border-color: var(--site-accent);
+        }
+
+        @media (max-width: 768px) {
+            body.site-shell .top-row {
+                min-height: 100vh;
+                padding: 1.5rem 0.75rem;
+            }
+
+            body.site-shell .profile-module {
+                padding: 1.5rem;
+            }
+
+            body.site-shell .bottom-row {
+                min-height: auto;
+                padding: 2rem 0.75rem;
+            }
+
+            body.site-shell .bottom-row .module {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body.site-shell .profile-info h1 {
+                font-size: 1.8rem;
+            }
+
+            body.site-shell .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="site-shell">
     <div class="container">
         <!-- Header Section -->
         <div class="top-row">
