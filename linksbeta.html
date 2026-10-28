@@ -56,68 +56,150 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding: clamp(48px, 15vh, 150px) var(--pad) 32px;
+            padding: clamp(36px, 8vh, 90px) var(--pad) 28px;
             transition: opacity 1s ease, transform 1s ease;
         }
 
-        h1 {
+        h1.site-title {
             font-weight: 300;
-            font-size: clamp(2.1rem, 9.4vw, 6.4rem);
+            font-size: clamp(2rem, 8.4vw, 4.4rem);
             line-height: 1.1;
-            letter-spacing: 0;
             overflow-wrap: anywhere;
         }
 
         .tagline {
-            margin-top: 0.6rem;
+            margin-top: 0.4rem;
             color: var(--dim);
-            font-size: clamp(0.95rem, 3.4vw, 1.3rem);
+            font-size: clamp(0.9rem, 3.2vw, 1.15rem);
         }
 
-        .status {
-            margin-top: 2rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-            max-width: 100%;
-            font-size: clamp(0.8rem, 3.2vw, 1rem);
-            color: var(--dim);
+        /* glass card, borrowed from the About Me page */
+        .profile-module {
+            margin-top: clamp(1.2rem, 3.5vh, 2rem);
+            width: 100%;
+            max-width: 700px;
+            padding: 1.1rem 1.6rem 1.5rem;
+            text-align: left;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 4px;
+            transition: border-color .3s;
         }
 
-        .status .dot {
+        .profile-module:hover { border-color: rgba(255, 255, 255, 0.55); }
+
+        /* same prompt styling as the dock at the bottom */
+        .card-prompt {
+            font-size: 0.85rem;
+            color: var(--faint);
+            margin-bottom: 1.2rem;
+            overflow-wrap: anywhere;
+        }
+
+        .card-prompt span { color: var(--dim); }
+
+        .profile-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.8rem;
+        }
+
+        .profile-card img {
             flex: none;
-            width: 0.6rem;
-            height: 0.6rem;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: #6c757d;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            outline: 1px solid rgba(255, 255, 255, 0.18);
+            outline-offset: 5px;
+            object-fit: cover;
+            background: #161515;
         }
 
-        .status .status-text { overflow-wrap: anywhere; text-align: left; }
+        .profile-right {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .name-with-icon { display: flex; align-items: center; gap: 0.75rem; }
+        .name-icon { font-size: 1.7rem; flex: none; }
+
+        .profile-right h2 {
+            font-weight: 300;
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+        }
+
+        .pronouns { color: var(--dim); font-size: 0.9rem; margin-top: -0.3rem; }
+
+        .status-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .status,
+        .quick-links {
+            flex: 1;
+            min-width: 190px;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.7rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            line-height: 1.25;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+        }
+
+        .status { color: var(--fg); }
+
+        .status .status-icon { flex: none; font-size: 1.1rem; color: #6c757d; transition: color .3s; }
+        .status .status-text { flex: 1; overflow-wrap: anywhere; }
+
+        .quick-links {
+            justify-content: center;
+            gap: 0.4rem 1.1rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-links a { white-space: nowrap; transition: opacity .2s; }
+        .quick-links a:hover,
+        .quick-links a:focus-visible { opacity: .65; text-decoration: underline; text-underline-offset: 4px; }
+        .quick-links i { margin-right: 0.3rem; font-size: 0.85rem; }
+
+        .tech-stack { display: flex; gap: 1.5rem; margin-top: 0.1rem; }
+        .tech-stack i { font-size: 1.7rem; transition: transform .3s, color .3s; }
+        .tech-stack i:hover { transform: translateY(-3px); opacity: .75; }
 
         .announcement {
-            margin-top: 1rem;
-            font-size: clamp(0.8rem, 3.2vw, 1rem);
+            margin-top: 1.1rem;
+            padding-top: 0.9rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
             color: var(--dim);
         }
+
+        .announcement::before { content: '# '; color: var(--faint); }
 
         .announcement b { color: var(--fg); font-weight: 400; letter-spacing: 0.08em; }
 
-        .profile-nav {
-            margin-top: 1.4rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.4rem 1.6rem;
-            font-size: clamp(0.8rem, 3.2vw, 1rem);
+        @media (max-width: 640px) {
+            .profile-module { padding: 1.2rem 1rem; text-align: center; }
+            .profile-card { flex-direction: column; align-items: center; gap: 1rem; }
+            .profile-card img { width: 100px; height: 100px; }
+            .profile-right { width: 100%; align-items: center; }
+            .name-with-icon { justify-content: center; }
+            .status-links { width: 100%; flex-direction: column; gap: 0.5rem; }
+            .status, .quick-links { min-width: 0; width: 100%; }
+            .status .status-text { text-align: left; }
+            .tech-stack { justify-content: center; gap: 1.2rem; }
         }
-
-        .profile-nav a {
-            border-bottom: 1px solid var(--faint);
-            transition: border-color .2s, color .2s;
-        }
-
-        .profile-nav a:hover,
-        .profile-nav a:focus-visible { border-color: var(--fg); }
 
         /* ---------- Terminal dock (bottom-left of page) ---------- */
         .dock { padding: 0 var(--pad) var(--pad); }
@@ -231,20 +313,41 @@
 
     <!-- Profile section -->
     <main class="profile">
-        <h1>Snowy0Web</h1>
+        <h1 class="site-title">Snowy0Web</h1>
         <p class="tagline">All my links ♡</p>
 
-        <div id="discord-status" class="status" aria-live="polite">
-            <span class="dot"></span>
-            <span class="status-text">Loading...</span>
+        <div class="profile-module">
+            <p class="card-prompt"><span>01snowy@social-links:~$</span> whoami</p>
+            <div class="profile-card">
+                <img src="/images/pfp.jpg" alt="Profile picture">
+                <div class="profile-right">
+                    <div class="name-with-icon">
+                        <i class="fa-regular fa-file-code name-icon" aria-hidden="true"></i>
+                        <h2>0 l _ s n o w y</h2>
+                    </div>
+                    <div class="pronouns">Pronouns: He/Him</div>
+
+                    <div class="status-links">
+                        <div id="discord-status" class="status" aria-live="polite">
+                            <i class="fa-brands fa-discord status-icon" aria-hidden="true"></i>
+                            <span class="status-text">Loading status...</span>
+                        </div>
+                        <nav class="quick-links" aria-label="Pages">
+                            <a href="/aboutme" title="About Me"><i class="fa-solid fa-user"></i>About Me</a>
+                            <a href="/specs" title="Pc and VR Specs"><i class="fa-solid fa-desktop"></i>Specs</a>
+                        </nav>
+                    </div>
+
+                    <div class="tech-stack">
+                        <i class="fa-regular fa-file-code" title="HTML5"></i>
+                        <i class="fa-brands fa-css" title="CSS3"></i>
+                        <i class="fa-brands fa-python" title="Python"></i>
+                    </div>
+                </div>
+            </div>
+
+            <p class="announcement"><b>ANNOUNCEMENT</b> &nbsp;Added a About me site. :3 ♡</p>
         </div>
-
-        <p class="announcement"><b>ANNOUNCEMENT</b> &nbsp;Added a About me site. :3 ♡</p>
-
-        <nav class="profile-nav" aria-label="Pages">
-            <a href="/aboutme">About Me</a>
-            <a href="/specs">Pc and VR Specs</a>
-        </nav>
     </main>
 
     <!-- Terminal dock: prompt + "cat social_links.txt" output -->
@@ -268,7 +371,7 @@
                     <li style="--i:7"><a href="https://bsky.app/profile/snowy0l.bsky.social" data-label="Bluesky · snowy0l.bsky.social" aria-label="Bluesky"><i class="fa-brands fa-square-bluesky"></i></a></li>
                     <li style="--i:8"><a href="https://open.spotify.com/user/i35t0sjd1qyrul7d8o9zcx8vm?si=073d1ef11af7494f" data-label="Spotify" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a></li>
                 </ul>
-                <footer>2025–2026 Snowy0Web - Made with love by 0lsnowy♡</footer>
+                <footer>2025–2026 Snowy0Web - Made with real graphics design with code by claude by 0lsnowy♡</footer>
             </div>
         </div>
     </section>
@@ -310,7 +413,7 @@
     // ---------- Discord status (Lanyard) ----------
     const USER_ID = '850894487755554816';
     const statusBox = document.getElementById('discord-status');
-    const dot = statusBox.querySelector('.dot');
+    const statusIcon = statusBox.querySelector('.status-icon');
     const text = statusBox.querySelector('.status-text');
 
     async function fetchDiscordStatus() {
@@ -337,7 +440,7 @@
             }
 
             text.textContent = label;
-            dot.style.background = color;
+            statusIcon.style.color = color;
         } catch (err) {
             console.error('Failed to fetch Discord status:', err);
             text.textContent = 'Error loading Discord status.';
