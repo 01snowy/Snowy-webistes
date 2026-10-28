@@ -771,7 +771,7 @@
     </style>
     <link rel="stylesheet" href="/assets/css/site.css">
 </head>
-<body class="site-shell">
+<body class="site-shell index-page">
     <div class="container">
         <!-- Profile Section -->
         <div class="top-row">
@@ -816,7 +816,7 @@
             <div class="module about-module">
                 <h2>About Me ♡</h2>
                 <div class="about-me">
-                    <p>hey! i'm a 19 y/o web dev from the US who specializes in self built services. i've got 4 cats (they lowk the real dev's), MY EVIL: (i build everything with a little ai :(. i made the discord rpc thing with lanyard pub api, sorry😔.), my homelab is cool ig i have a gpu in it for unity :3, I like making things as simple as possible with what I have, and im mostly a one-trick pony web developer, but it's cool ig. :3</p>     
+                    <p>hey! i'm a 19 y/o web dev from the US who likes self built services. I have 4 cats, MY EVIL: I build everything with a little ai :(. (I made the discord rpc thing with lanyard pub api, sorry😔.), my homelab is cool ig i have a gpu in it for unity :D, I like making things as simple as possible with what I have, and im mostly a one-trick pony web developer, but thats alright. "gn girl ill see you tommorow" - RIP Twomad. Im also maintaining a fork of a old stt app for vrc with plugins and qol features. </p>     
                     <p>(～﹃～)~zZ</p>
                     <div class="tech-stack">
                         <i class="fa-regular fa-file-code" title="HTML5"></i>
@@ -877,6 +877,52 @@
     </div>
 
     <script>
+        const clickAudio = new Audio('/assets/Click.wav');
+        const errorAudio = new Audio('/assets/error.wav');
+
+        clickAudio.volume = 0.28;
+        errorAudio.volume = 0.35;
+
+        function playAudio(audio) {
+            if (!audio) return;
+            audio.pause();
+            audio.currentTime = 0;
+            const playPromise = audio.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {});
+            }
+
+            const halfLength = Number.isFinite(audio.duration) ? audio.duration * 500 : 175;
+            setTimeout(() => {
+                audio.pause();
+                audio.currentTime = 0;
+            }, Math.max(150, halfLength));
+        }
+
+        function getClickDelay(audioElement) {
+            const duration = Number.isFinite(audioElement.duration) ? audioElement.duration * 1000 : 350;
+            return Math.max(200, duration * 0.5 + 50);
+        }
+
+        function triggerDelayedNavigation(event, link) {
+            const href = link.getAttribute('href');
+            if (!href || link.dataset.soundDelayBound === 'true') {
+                return;
+            }
+
+            event.preventDefault();
+            playAudio(clickAudio);
+
+            setTimeout(() => {
+                if (link.target === '_blank') {
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                    return;
+                }
+
+                window.location.href = href;
+            }, getClickDelay(clickAudio));
+        }
+
         // Discord Status
         async function fetchDiscordRPC() {
             const userId = "850894487755554816";
@@ -902,6 +948,7 @@
                 }
             } catch (error) {
                 console.error("Failed to fetch Discord status:", error);
+                playAudio(errorAudio);
             }
         }
 
@@ -934,29 +981,48 @@
             img.addEventListener('click', () => {
                 modalImage.src = img.src;
                 imageModal.classList.add('show');
+                playAudio(clickAudio);
             });
         });
 
         closeModal.addEventListener('click', () => {
             imageModal.classList.remove('show');
+            playAudio(clickAudio);
         });
 
         window.addEventListener('click', (event) => {
             if (event.target === imageModal) {
                 imageModal.classList.remove('show');
+                playAudio(clickAudio);
             }
         });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && imageModal.classList.contains('show')) {
                 imageModal.classList.remove('show');
+                playAudio(clickAudio);
+            }
+        });
+
+        document.body.addEventListener('click', (event) => {
+            const link = event.target.closest('a');
+            if (link && link.getAttribute('href')) {
+                triggerDelayedNavigation(event, link);
+                return;
+            }
+
+            if (event.target.closest('button, .picture-container, .contact-item')) {
+                playAudio(clickAudio);
             }
         });
 
         // Smooth scroll hint
         document.querySelector('.scroll-hint').addEventListener('click', (e) => {
             e.preventDefault();
-            document.getElementById('bio').scrollIntoView({ behavior: 'smooth' });
+            playAudio(clickAudio);
+            setTimeout(() => {
+                document.getElementById('bio').scrollIntoView({ behavior: 'smooth' });
+            }, getClickDelay(clickAudio));
         });
 
         // Fade scroll hint on scroll

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowy0Web</title>
+    <meta content="Snowy0Web" property="og:title" />
+    <meta content="All my links and photos!" property="og:description" />
+    <meta content="https://0lsnowy.xyz" property="og:url" />
+    <meta content="https://0lsnowy.xyz/images/img1.jpg" property="og:image" />
+    <meta content="#000000" name="theme-color" />
+
+    <!-- Fira Code Light matches the type in the PSDs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9f2249c235.js" crossorigin="anonymous"></script>
+
+    <script>document.documentElement.classList.add('js');</script>
+    <style>
+        :root {
+            --bg: #000000;
+            --fg: #ffffff;
+            --dim: #bbbbbb;
+            --faint: #6f6f6f;
+            --pad: clamp(16px, 2vw, 25px);
+            --prompt-size: clamp(0.68rem, 3.1vw, 1.45rem);
+            --icon-size: clamp(26px, calc((100vw - 32px) / 11.9), 44px);
+            --icon-pitch: calc(var(--icon-size) * 1.32);
+            --mono: 'Fira Code', 'JetBrains Mono', 'Cascadia Mono', Consolas, 'Courier New', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { background: var(--bg); }
+
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--mono);
+            font-weight: 300;
+            line-height: 1.5;
+            min-height: 100vh;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ---------- Profile section (top of page) ---------- */
+        .profile {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: clamp(48px, 15vh, 150px) var(--pad) 32px;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        h1 {
+            font-weight: 300;
+            font-size: clamp(2.1rem, 9.4vw, 6.4rem);
+            line-height: 1.1;
+            letter-spacing: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .tagline {
+            margin-top: 0.6rem;
+            color: var(--dim);
+            font-size: clamp(0.95rem, 3.4vw, 1.3rem);
+        }
+
+        .status {
+            margin-top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            max-width: 100%;
+            font-size: clamp(0.8rem, 3.2vw, 1rem);
+            color: var(--dim);
+        }
+
+        .status .dot {
+            flex: none;
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background: #6c757d;
+        }
+
+        .status .status-text { overflow-wrap: anywhere; text-align: left; }
+
+        .announcement {
+            margin-top: 1rem;
+            font-size: clamp(0.8rem, 3.2vw, 1rem);
+            color: var(--dim);
+        }
+
+        .announcement b { color: var(--fg); font-weight: 400; letter-spacing: 0.08em; }
+
+        .profile-nav {
+            margin-top: 1.4rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem 1.6rem;
+            font-size: clamp(0.8rem, 3.2vw, 1rem);
+        }
+
+        .profile-nav a {
+            border-bottom: 1px solid var(--faint);
+            transition: border-color .2s, color .2s;
+        }
+
+        .profile-nav a:hover,
+        .profile-nav a:focus-visible { border-color: var(--fg); }
+
+        /* ---------- Terminal dock (bottom-left of page) ---------- */
+        .dock { padding: 0 var(--pad) var(--pad); }
+
+        .prompt-line {
+            font-size: var(--prompt-size);
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            min-height: 1.5em;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 0.55em;
+            height: 1.05em;
+            margin-left: 0.08em;
+            vertical-align: text-bottom;
+            background: var(--fg);
+            animation: blink 1.05s steps(1) infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* "cat" output: the icon row. Collapses to nothing during the intro. */
+        .output {
+            display: grid;
+            grid-template-rows: 1fr;
+            transition: grid-template-rows .7s cubic-bezier(.2,.7,.2,1);
+        }
+
+        .output > div { overflow: hidden; }
+
+        .icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 0;
+            margin: 0.7rem 0 0 calc((var(--icon-pitch) - var(--icon-size)) / -2);
+            list-style: none;
+        }
+
+        .icons li {
+            opacity: 1;
+            transform: none;
+            transition: opacity .45s ease, transform .45s ease;
+            transition-delay: calc(var(--i) * 70ms + 250ms);
+        }
+
+        .icons a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--icon-pitch);
+            height: var(--icon-size);
+            font-size: var(--icon-size);
+            line-height: 1;
+            color: var(--fg);
+            transition: transform .2s ease, opacity .2s ease;
+        }
+
+        .icons a > i { width: auto; }
+        .icons svg { height: var(--icon-size); width: auto; display: block; fill: currentColor; }
+
+        .icons a:hover,
+        .icons a:focus-visible { transform: translateY(-4px); opacity: .75; outline: none; }
+
+        .icons a:focus-visible { outline: 1px dashed var(--fg); outline-offset: 4px; }
+
+        /* label that appears on hover, like a tiny terminal tooltip */
+        .icons a::after {
+            content: attr(data-label);
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 10px);
+            transform: translateX(-50%) translateY(4px);
+            padding: 2px 8px;
+            font: 300 0.75rem/1.4 var(--mono);
+            white-space: nowrap;
+            color: var(--bg);
+            background: var(--fg);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .15s, transform .15s;
+        }
+
+        .icons a:hover::after,
+        .icons a:focus-visible::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        footer {
+            margin-top: 1.1rem;
+            color: var(--faint);
+            font-size: 0.75rem;
+            transition: opacity 1s ease;
+        }
+
+        /* ---------- Intro state (only when JS is running) ---------- */
+        .js:not(.done) .profile { opacity: 0; transform: translateY(14px); pointer-events: none; }
+        .js:not(.done) footer { opacity: 0; }
+        .js:not(.done) .output { grid-template-rows: 0fr; }
+        .js:not(.done) .icons li { opacity: 0; transform: translateY(8px); transition-delay: 0s; }
+
+        /* once the intro is over the cursor sits still-blinking at the end of the line */
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition-duration: .01ms !important; transition-delay: 0s !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+            .cursor { animation: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile section -->
+    <main class="profile">
+        <h1>Snowy0Web</h1>
+        <p class="tagline">All my links ♡</p>
+
+        <div id="discord-status" class="status" aria-live="polite">
+            <span class="dot"></span>
+            <span class="status-text">Loading...</span>
+        </div>
+
+        <p class="announcement"><b>ANNOUNCEMENT</b> &nbsp;Added a About me site. :3 ♡</p>
+
+        <nav class="profile-nav" aria-label="Pages">
+            <a href="/aboutme">About Me</a>
+            <a href="/specs">Pc and VR Specs</a>
+        </nav>
+    </main>
+
+    <!-- Terminal dock: prompt + "cat social_links.txt" output -->
+    <section class="dock">
+        <p class="prompt-line" aria-label="01snowy@social-links:~$ cat social_links.txt"><span id="typed"></span><span class="cursor" aria-hidden="true"></span></p>
+
+        <div class="output">
+            <div>
+                <ul class="icons">
+                    <li style="--i:0"><a href="https://discord.com/users/850894487755554816" data-label="Discord · 0lsnowy" aria-label="Discord"><i class="fa-brands fa-discord"></i></a></li>
+                    <li style="--i:1"><a href="/music" data-label="Music" aria-label="Music"><i class="fa-solid fa-music"></i></a></li>
+                    <li style="--i:2"><a href="https://vrchat.com/home/user/usr_0eec76b6-9802-4c46-8391-4243f2327b09" data-label="VRChat · @0 l s n o w y" aria-label="VRChat">
+                        <svg viewBox="0 0 62 48" aria-hidden="true"><path fill-rule="evenodd" d="M7 2h48a5 5 0 0 1 5 5v26a5 5 0 0 1-5 5H43l-8 9.5V38H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm6.2 6.5 6 20.5h4.6l6-20.5h-4.3l-4 15-4-15h-4.3Zm19.8 0V29h4.2v-7.2h2.3l3.5 7.2h4.7l-4.1-8c2.3-1 3.5-2.9 3.5-5.6 0-3.9-2.7-6.9-7.2-6.9H33Zm4.2 3.6h3.1c1.8 0 2.8.9 2.8 2.6s-1 2.7-2.8 2.7h-3.1v-5.3Z"/></svg>
+                    </a></li>
+                    <li style="--i:3"><a href="https://x.com/0lsnowy" data-label="X · @0lsnowy" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li style="--i:4"><a href="https://github.com/01snowy" data-label="GitHub · 01snowy" aria-label="GitHub"><i class="fa-brands fa-square-github"></i></a></li>
+                    <li style="--i:5"><a href="/blog" data-label="My Blog" aria-label="My Blog"><i class="fa-solid fa-blog"></i></a></li>
+                    <li style="--i:6"><a href="https://stats.fm/12ong" data-label="Stats.fm · 12ong" aria-label="Stats.fm">
+                        <svg viewBox="0 0 44 44" aria-hidden="true"><g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"><path d="M10 17v23"/><path d="M22 4v36"/><path d="M34 30v10"/></g></svg>
+                    </a></li>
+                    <li style="--i:7"><a href="https://bsky.app/profile/snowy0l.bsky.social" data-label="Bluesky · snowy0l.bsky.social" aria-label="Bluesky"><i class="fa-brands fa-square-bluesky"></i></a></li>
+                    <li style="--i:8"><a href="https://open.spotify.com/user/i35t0sjd1qyrul7d8o9zcx8vm?si=073d1ef11af7494f" data-label="Spotify" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a></li>
+                </ul>
+                <footer>2025–2026 Snowy0Web - Made with love by 0lsnowy♡</footer>
+            </div>
+        </div>
+    </section>
+
+<script>
+(function () {
+    const root = document.documentElement;
+    const typedEl = document.getElementById('typed');
+
+    // The line from the PSDs. Change the handle here if you want "0lsnowy" instead.
+    const COMMAND = '01snowy@social-links:~$ cat social_links.txt';
+
+    function finish() {
+        typedEl.textContent = COMMAND;
+        root.classList.add('done');
+    }
+
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+        finish();
+    } else {
+        let i = 0;
+        const START_DELAY = 700;   // black screen beat before typing
+        const PAUSE_BEFORE_REVEAL = 450;
+
+        function type() {
+            if (i < COMMAND.length) {
+                typedEl.textContent += COMMAND.charAt(i++);
+                // human-ish rhythm: quicker on the prompt, a little slower on the command
+                const base = i < 24 ? 38 : 70;
+                setTimeout(type, base + Math.random() * 45);
+            } else {
+                setTimeout(() => root.classList.add('done'), PAUSE_BEFORE_REVEAL);
+            }
+        }
+        setTimeout(type, START_DELAY);
+    }
+
+    // ---------- Discord status (Lanyard) ----------
+    const USER_ID = '850894487755554816';
+    const statusBox = document.getElementById('discord-status');
+    const dot = statusBox.querySelector('.dot');
+    const text = statusBox.querySelector('.status-text');
+
+    async function fetchDiscordStatus() {
+        try {
+            const res = await fetch('https://api.lanyard.rest/v1/users/' + USER_ID);
+            const json = await res.json();
+            if (!json.success) { text.textContent = 'Failed to load Discord status.'; return; }
+
+            const d = json.data;
+            let label = 'Currently idle.';
+            let color = '#ffc107';
+
+            if (d.discord_status === 'offline') { label = 'Currently offline.'; color = '#6c757d'; }
+            else if (d.discord_status === 'online' || d.discord_status === 'idle') { label = 'Online'; color = '#28a745'; }
+            else if (d.discord_status === 'dnd') { label = 'Do not disturb.'; color = '#dc3545'; }
+
+            if (d.listening_to_spotify && d.spotify) {
+                label = '♬⋆.˚Listening to ' + d.spotify.song + ' by ' + d.spotify.artist;
+            } else if (d.activities && d.activities.length) {
+                const act = d.activities.find(a => a.name !== 'Custom Status');
+                if (act && act.name) {
+                    label += ' — Playing ' + act.name + (act.details ? ': ' + act.details : '');
+                }
+            }
+
+            text.textContent = label;
+            dot.style.background = color;
+        } catch (err) {
+            console.error('Failed to fetch Discord status:', err);
+            text.textContent = 'Error loading Discord status.';
+        }
+    }
+
+    fetchDiscordStatus();
+    setInterval(fetchDiscordStatus, 15000);
+})();
+</script>
+</body>
+</html>
