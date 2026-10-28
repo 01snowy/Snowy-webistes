@@ -55,27 +55,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: clamp(36px, 8vh, 90px) var(--pad) 28px;
+            padding: clamp(20px, 5vh, 52px) var(--pad) 28px;
             transition: opacity 1s ease, transform 1s ease;
-        }
-
-        h1.site-title {
-            font-weight: 300;
-            font-size: clamp(2rem, 8.4vw, 4.4rem);
-            line-height: 1.1;
-            overflow-wrap: anywhere;
-        }
-
-        .tagline {
-            margin-top: 0.4rem;
-            color: var(--dim);
-            font-size: clamp(0.9rem, 3.2vw, 1.15rem);
         }
 
         /* glass card, borrowed from the About Me page */
         .profile-module {
-            margin-top: clamp(1.2rem, 3.5vh, 2rem);
+            margin-top: 0;
             width: 100%;
             max-width: 700px;
             padding: 1.1rem 1.6rem 1.5rem;
@@ -330,9 +318,6 @@
 
     <!-- Profile section -->
     <main class="profile">
-        <h1 class="site-title">Snowy0Web</h1>
-        <p class="tagline">All my links ♡</p>
-
         <div class="profile-module">
             <p class="card-prompt"><span>01snowy@social-links:~$</span> whoami</p>
             <div class="profile-card">
