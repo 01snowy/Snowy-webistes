@@ -25,7 +25,7 @@
             --faint: #6f6f6f;
             --pad: clamp(16px, 2vw, 25px);
             --prompt-size: clamp(0.68rem, 3.1vw, 1.45rem);
-            --icon-size: clamp(26px, calc((100vw - 32px) / 11.9), 44px);
+            --icon-size: clamp(20px, calc((100vw - 32px) / 14), 44px);
             --icon-pitch: calc(var(--icon-size) * 1.32);
             --mono: 'Fira Code', 'JetBrains Mono', 'Cascadia Mono', Consolas, 'Courier New', monospace;
         }
@@ -230,13 +230,14 @@
             transition: grid-template-rows .7s cubic-bezier(.2,.7,.2,1);
         }
 
-        .output > div { overflow: hidden; }
+        .output > div { min-height: 0; }
+        .js:not(.done) .output > div { overflow: hidden; }
 
         .icons {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px 0;
-            margin: 0.7rem 0 0 calc((var(--icon-pitch) - var(--icon-size)) / -2);
+            gap: 6px calc(var(--icon-size) * 0.2);
+            margin: 0.55rem 0 0.7rem;
             list-style: none;
         }
 
@@ -252,29 +253,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: var(--icon-pitch);
-            height: var(--icon-size);
+            min-width: var(--icon-size);
+            height: calc(var(--icon-size) + 12px);   /* extra room so the lift stays inside the hit area */
+            padding: 6px 3px;
             font-size: var(--icon-size);
             line-height: 1;
             color: var(--fg);
+        }
+
+        .icons a > i,
+        .icons a > svg {
+            display: block;
+            width: auto;
             transition: transform .2s ease, opacity .2s ease;
         }
 
-        .icons a > i { width: auto; }
-        .icons svg { height: var(--icon-size); width: auto; display: block; fill: currentColor; }
+        .icons svg { height: var(--icon-size); fill: currentColor; }
 
-        .icons a:hover,
-        .icons a:focus-visible { transform: translateY(-4px); opacity: .75; outline: none; }
+        .icons a:hover > i,
+        .icons a:hover > svg,
+        .icons a:focus-visible > i,
+        .icons a:focus-visible > svg { transform: translateY(-4px); opacity: .75; }
 
-        .icons a:focus-visible { outline: 1px dashed var(--fg); outline-offset: 4px; }
+        .icons a:focus-visible { outline: 1px dashed var(--fg); outline-offset: 2px; }
 
         /* label that appears on hover, like a tiny terminal tooltip */
         .icons a::after {
             content: attr(data-label);
             position: absolute;
             left: 50%;
-            bottom: calc(100% + 10px);
-            transform: translateX(-50%) translateY(4px);
+            top: calc(100% - 2px);
+            transform: translateX(-50%) translateY(-4px);
             padding: 2px 8px;
             font: 300 0.75rem/1.4 var(--mono);
             white-space: nowrap;
@@ -287,6 +296,14 @@
 
         .icons a:hover::after,
         .icons a:focus-visible::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* first icons: label grows to the right; last icons: grows to the left */
+        .icons li:nth-child(-n+3) a::after { left: 0; transform: translateY(-4px); }
+        .icons li:nth-child(-n+3) a:hover::after,
+        .icons li:nth-child(-n+3) a:focus-visible::after { transform: translateY(0); }
+        .icons li:nth-child(n+7) a::after { left: auto; right: 0; transform: translateY(-4px); }
+        .icons li:nth-child(n+7) a:hover::after,
+        .icons li:nth-child(n+7) a:focus-visible::after { transform: translateY(0); }
 
         footer {
             margin-top: 1.1rem;
